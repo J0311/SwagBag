@@ -19,15 +19,14 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
-    private int userId;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="userId", referencedColumnName = "id")
+    private User user;
     private LocalDateTime purchaseTime;
 
-    @Transient
-    private List<Product> products;
-    @Transient
-    private double subtotal;
-    @Transient
-    private double total;
-    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    private List<Purchase> purchases;
+   
 }
 
