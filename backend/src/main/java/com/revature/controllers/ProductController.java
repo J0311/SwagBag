@@ -3,6 +3,7 @@ package com.revature.controllers;
 import com.revature.annotations.Authorized;
 import com.revature.dtos.ProductInfo;
 import com.revature.models.Product;
+import com.revature.services.OrderService;
 import com.revature.services.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ public class ProductController {
 
     public ProductController(ProductService productService) {
         this.productService = productService;
+        
     }
 
     @Authorized
@@ -68,6 +70,7 @@ public class ProductController {
     	}
         
         productService.saveAll(productList, metadata);
+    
 
         return ResponseEntity.ok(productList);
     }
