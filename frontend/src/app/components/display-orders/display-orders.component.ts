@@ -15,7 +15,7 @@ export class DisplayOrdersComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("onInit called for OrdersComponent");
-    this.orderService.getOrders(1).subscribe( // change with actual user id
+    this.orderService.getOrders().subscribe( // change with actual user id
       (resp) => {
         this.allOrders = resp;
         console.log(this.allOrders);

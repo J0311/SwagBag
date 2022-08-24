@@ -9,12 +9,12 @@ import { Order } from '../models/order';
 })
 export class OrderService {
 
-  private productUrl: string = "/api/order/";
+  private productUrl: string = "/api/order/history";
 
   constructor(private http: HttpClient) { }
-
-  public getOrders(userId: number): Observable<Order[]> {
-    let path = environment.baseUrl+this.productUrl+userId;
+  
+  public getOrders(): Observable<Order[]> {
+    let path = environment.baseUrl+this.productUrl;
     console.log("Creating an HTTPRequest with path: " + path);
     return this.http.get<Order[]>(path, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
