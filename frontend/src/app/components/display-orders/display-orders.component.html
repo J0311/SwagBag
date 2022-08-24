@@ -1,0 +1,7 @@
+<app-navbar></app-navbar>
+
+<div *ngFor="let order of allOrders">
+    <app-order-card
+        [orderInfo]="order"
+    ></app-order-card> 
+</div>

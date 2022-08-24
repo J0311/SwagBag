@@ -1,6 +1,16 @@
 <div>
-    <h5>Order number</h5>
-    <p>Order time</p>
-    <p>Order total</p>
-    <a>Link to page</a> 
+    <p>OrderId = {{orderInfo.orderId}}</p>
+    <p>Name = {{orderInfo.user.firstName + ' ' + orderInfo.user.lastName}}</p>
+    <p>Purchase time = {{orderInfo.purchaseTime}}</p>
+    <div *ngFor="let purchase of orderInfo.purchases;">
+        <hr>
+        <p>PurchaseId = {{purchase.purchaseId}}</p>
+        <p>Quantity = {{purchase.quantity}}</p>
+        <p>Price per item = {{purchase.pricePerItem}}</p>
+        <p>Product name = {{purchase.product.name}}</p>
+        <p>Product description = {{purchase.product.description}}</p>
+        <img [src]="purchase.product.image">
+    </div>
+    <hr>
+    <hr>
 </div>

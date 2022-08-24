@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Order } from 'src/app/models/order';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -8,9 +9,12 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrderCardComponent implements OnInit {
 
-  constructor() { }
+  @Input() orderInfo!: Order;
+
+  constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
+    console.log("onInit called for OrderCardComponent");
   }
 
 }

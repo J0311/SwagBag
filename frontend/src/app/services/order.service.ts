@@ -14,6 +14,8 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   public getOrders(userId: number): Observable<Order[]> {
-    return this.http.get<Order[]>(environment.baseUrl+this.productUrl+userId, {headers: environment.headers, withCredentials: environment.withCredentials});
+    let path = environment.baseUrl+this.productUrl+userId;
+    console.log("Creating an HTTPRequest with path: " + path);
+    return this.http.get<Order[]>(path, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 }

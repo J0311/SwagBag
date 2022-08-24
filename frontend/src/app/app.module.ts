@@ -12,7 +12,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { DisplayProductsComponent } from './components/display-products/display-products.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OrdersComponent } from './components/display-orders/orders.component';
+import { DisplayOrdersComponent } from './components/display-orders/display-orders.component';
 import { OrderCardComponent } from './components/order-card/order-card.component';
 
 @NgModule({
@@ -25,7 +25,7 @@ import { OrderCardComponent } from './components/order-card/order-card.component
     CartComponent,
     CheckoutComponent,
     DisplayProductsComponent,
-    OrdersComponent,
+    DisplayOrdersComponent,
     OrderCardComponent
   ],
   imports: [

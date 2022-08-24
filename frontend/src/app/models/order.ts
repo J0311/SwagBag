@@ -2,13 +2,13 @@ import { Purchase } from "./purchase";
 import { User } from "./user";
 
 export class Order {
-    id: number;
+    orderId: number;
     user: User;
     purchaseTime: Date;
     purchases: Purchase[];
 
-    constructor (id: number, user: User, purchaseTime: Date, purchases: Purchase[]) {
-        this.id = id;
+    constructor (orderId: number, user: User, purchaseTime: Date, purchases: Purchase[]) {
+        this.orderId = orderId;
         this.user = user;
         this.purchaseTime = purchaseTime;
         this.purchases = purchases;
