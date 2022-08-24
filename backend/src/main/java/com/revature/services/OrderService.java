@@ -16,11 +16,10 @@ import java.util.Optional;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final PurchaseRepository purchaseRepository;
-
-    public OrderService(OrderRepository orderRepository, PurchaseRepository purchaseRepository) {
+   
+    public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.purchaseRepository = purchaseRepository;
+       
     }
 
     public List<Order> findAll() {
