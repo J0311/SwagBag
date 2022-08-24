@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
@@ -10,12 +10,19 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class CartComponent implements OnInit {
 
+  //added
+  cartCount!: number;
+
   products: {
     product: Product,
-    quantity: number
+    quantity: number,
+
   }[] = [];
   totalPrice!: number;
   cartProducts: Product[] = [];
+
+  //added
+  @Input() productInfo!: Product;
 
   constructor(private productService: ProductService, private router: Router) { }
 
@@ -40,5 +47,26 @@ export class CartComponent implements OnInit {
     this.productService.setCart(cart);
     this.router.navigate(['/home']);
   }
+
+  //added
+  removeFromCart(Product:id): void {
+    console.log(Product);
+
+    /*this.products.forEach(
+      (element) => {
+        --element.quantity;
+        if(element.quantity<1){
+          this.products.pop();
+        }
+      }
+    );*/
+    --product.quantity;
+    if(product.quantity<1){
+      this.products = this.products.filter(({product: p}) => p.id !== product.id)
+      //this.products=this.products.filter((p:Product) => p.id !== product.id)
+    }
+  }
+
+
 
 }
