@@ -1,11 +1,7 @@
 package com.revature.services;
 
-import com.revature.dtos.ProductInfo;
 import com.revature.models.Order;
-import com.revature.models.Product;
 import com.revature.repositories.OrderRepository;
-import com.revature.repositories.ProductRepository;
-import com.revature.repositories.PurchaseRepository;
 
 import org.springframework.stereotype.Service;
 
