@@ -1,0 +1,8 @@
+.card {
+    size: auto;
+    min-width: 275px;
+    max-width: 200px;
+    height: fit-content;
+    transition: .2s ease-out;
+  
+  }
