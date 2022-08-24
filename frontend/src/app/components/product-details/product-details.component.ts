@@ -12,8 +12,11 @@ import {Subscription} from 'rxjs';
     styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit{
+    
     productId = 0;
+
     @Input() productInfo!: Product;
+
     cartCount!: number;
     products: {
       product: Product,
