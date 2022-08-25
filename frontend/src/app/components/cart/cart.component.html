@@ -13,10 +13,10 @@
             <td>{{product.product.id}}</td>
             <td>{{product.product.name}}</td>
             <td>{{product.quantity}}</td>
-          <!--<td>{{product.product.quantity}}</td>-->
+         <!-- <td>{{product.product.quantity}}</td>-->
             <td>{{product.product.description}}</td>
           //added
-          <td><button class="btn btn-outline-success" (click)="removeFromCart(product.product)">Remove from Cart</button></td>
+          <td><button class="btn btn-outline-success" (click)="removeFromCart(product.product,product.quantity)">Remove from Cart</button></td>
         </tr>
     </tbody>
 </table>

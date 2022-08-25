@@ -54,7 +54,7 @@ export class CartComponent implements OnInit {
   }
 
   //added
-  removeFromCart(product: Product): void {
+ /* removeFromCart(product: Product): void {
     console.log(Product);
 
 
@@ -71,9 +71,41 @@ export class CartComponent implements OnInit {
     this.products[index] = newProduct;
 
     //add
-    product.quantity = newProduct.product.quantity
+    //product.quantity = newProduct.product.quantity
 
     if(product.quantity<1){
+      this.products.pop();
+    }
+
+  }*/
+
+
+  removeFromCart(product: Product, quantity: number): void {
+    /*console.log(Product);
+    console.log(quantity);
+*/
+
+    //const newProduct = Object.assign( product, {quantity: product.quantity-1})
+    const index = this.products.findIndex(({product:p}) => p.id === product.id)
+
+    let newProduct = {
+      product: product,
+      quantity: --quantity
+      //quantity: this.products[index].quantity--
+    };
+
+
+    /*product.quantity=quantity--;
+    console.log(Product);
+    console.log(quantity);
+    console.log(product);
+    console.log(product.quantity);*/
+    this.products[index] = newProduct;
+
+    //add
+    //product.quantity = newProduct.product.quantity
+
+    if(quantity<1){
       this.products.pop();
     }
 
