@@ -73,6 +73,8 @@ export class ProductCardComponent implements OnInit{
   navigateToProductPage(product: Product): void {
     // This will move you to the route for the product with ID of this product's ID
     this.router.navigate(['/product-details', product.id]);
+    let productSelected = this.productInfo;
+    console.log(productSelected);
   }
 
   ngOnDestroy() {

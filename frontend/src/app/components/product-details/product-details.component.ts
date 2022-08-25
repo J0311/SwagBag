@@ -4,7 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
-import {Subscription} from 'rxjs';
+import { Subscription, Observable, Observer} from 'rxjs';
+import {findIndex, tap} from 'rxjs/operators'
+import { } from 'src/app/components/navbar/navbar.component';
+
 
 @Component({
     selector: 'app-product-details',
@@ -15,8 +18,9 @@ export class ProductDetailsComponent implements OnInit{
     
     productId = 0;
 
+    
     @Input() productInfo!: Product;
-
+    
     cartCount!: number;
     products: {
       product: Product,
@@ -27,50 +31,59 @@ export class ProductDetailsComponent implements OnInit{
     
     constructor(private productService: ProductService, private router: ActivatedRoute) { }
     ngOnInit(): void {
+      //gets product id from homepage when view button is clicked
         this.productId = parseInt(this.router.snapshot.paramMap.get('productId') || "", 10);
-        this.productService.getSingleProduct(this.productId).subscribe();
+        //sets this instance of product info equal to the product id
+        this.productService.getSingleProduct(this.productId).subscribe(data => {this.productInfo = data; console.log(this.productInfo)});
         this.subscription = this.productService.getCart().subscribe(
-            (cart) => {
-              this.cartCount = cart.cartCount;
-              this.products = cart.products;
-              this.totalPrice = cart.totalPrice;
-            }
-          );
+          (cart) => {
+            this.cartCount = cart.cartCount;
+            this.products = cart.products;
+            this.totalPrice = cart.totalPrice;
+          }
+        );           
+
     }
 
     addToCart(product: Product): void {
 
-        let inCart = false;
-    
-        this.products.forEach(
-          (element) => {
-            if(element.product == product){
-              ++element.quantity;
-              let cart = {
-                cartCount: this.cartCount + 1,
-                products: this.products,
-                totalPrice: this.totalPrice + product.price
-              };
-              this.productService.setCart(cart);
-              inCart=true;
-              return;
+      let inCart = false;
+  
+      this.products.forEach(
+        (element) => {
+          if(element.product == product){
+            ++element.quantity;
+            let cart = {
+              cartCount: this.cartCount + 1,
+              products: this.products,
+              totalPrice: this.totalPrice + product.price
             };
-          }
-        );
-    
-        if(inCart == false){
-          let newProduct = {
-            product: product,
-            quantity: 1
+            this.productService.setCart(cart);
+            inCart=true;
+            return;
           };
-          this.products.push(newProduct);
-          let cart = {
-            cartCount: this.cartCount + 1,
-            products: this.products,
-            totalPrice: this.totalPrice + product.price
-          }
-          this.productService.setCart(cart);
         }
-          
+      );
+  
+      if(inCart == false){
+        let newProduct = {
+          product: product,
+          quantity: 1
+        };
+        this.products.push(newProduct);
+        let cart = {
+          cartCount: this.cartCount + 1,
+          products: this.products,
+          totalPrice: this.totalPrice + product.price
+        }
+        this.productService.setCart(cart);
       }
+        
+    }
+
+
+    
+   
+
+    
 }
