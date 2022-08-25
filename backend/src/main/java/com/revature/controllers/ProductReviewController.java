@@ -1,0 +1,81 @@
+package com.revature.controllers;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.revature.annotations.Authorized;
+import com.revature.models.ProductReview;
+import com.revature.services.ProductReviewService;
+
+@RestController
+@RequestMapping("/api/product-reviews")
+@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000" }, allowCredentials = "true")
+public class ProductReviewController {
+    private final ProductReviewService productReviewService;
+
+    public ProductReviewController(ProductReviewService productReviewService) {
+        this.productReviewService = productReviewService;
+    }
+
+    @Authorized
+    @GetMapping(path = "/{productId}", produces = "application/json")
+    public ResponseEntity<List<ProductReview>> getProductReviews(@PathVariable int productId) {
+        return new ResponseEntity<>(productReviewService.getProductReviews(productId), HttpStatus.OK);
+    }
+
+    @Authorized
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductReview> getById(@PathVariable("id") int id) {
+        Optional<ProductReview> optional = productReviewService.findById(id);
+
+        if (!optional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(optional.get());
+    }
+
+    @Authorized
+    @PostMapping
+    public ResponseEntity<ProductReview> save(@RequestBody ProductReview productReview) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productReviewService.save(productReview));
+    }
+
+    @Authorized
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductReview> update(@PathVariable("id") int id, @RequestBody ProductReview productReview) {
+        Optional<ProductReview> optional = productReviewService.findById(id);
+
+        if (!optional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        productReview.setId(id);
+        return ResponseEntity.ok(productReviewService.save(productReview));
+    }
+
+    @Authorized
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ProductReview> delete(@PathVariable("id") int id) {
+        Optional<ProductReview> optional = productReviewService.findById(id);
+
+        if (!optional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        productReviewService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+}
