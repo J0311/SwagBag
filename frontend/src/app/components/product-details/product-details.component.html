@@ -1,25 +1,58 @@
 <app-navbar></app-navbar>
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" [src]="productInfo.image" alt="">
-    <div class="card-body">
-        <h5 class="card-title">{{productInfo.name}}</h5>
-    </div>
-    <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
+    <div class="container">
+    
+        <img [src]="productInfo.image" class="cart_item">
+        <div class="zoom" >
+            <img [src]="productInfo.image">
         </div>
-        <input type="number" class="form-control" aria-label="Sizing example input" [value]="productInfo.price" aria-describedby="inputGroup-sizing-sm" disabled>
-    </div>
-    <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Quantity in Stock</span>
+        <div class="card-body">
+            <h5 class="card-title">{{productInfo.name}}</h5>
         </div>
-        <input type="number" class="from-control" aria-label="Sizing example input" [value]="productInfo.quantity" aria-describedby="inputGroup-sizing-sm" disabled>
+    
+    <div class="details">
+        <p>This is going to be wher all the product details go. Making all this text as a placeholder until the SQL data for it is made. It is going to be productInfo.productDetails.
+            Having this text here currently is to take up all the space to visualize the web page. I hope people are having a nice day. These items are the best items. Please buy our items.
+            I think this will be enough for now. I can now style this paragragh.
+        </p>
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
+            </div>
+            <input type="number" class="form-control" aria-label="Sizing example input" [value]="productInfo.price" aria-describedby="inputGroup-sizing-sm" disabled>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Quantity in Stock</span>
+            </div>
+            <input type="number" class="from-control" aria-label="Sizing example input" [value]="productInfo.quantity" aria-describedby="inputGroup-sizing-sm" disabled>
+        </div>
+        <div class="card-body">
+            <button class="btn btn-outline-success" (click)="addToCart(productInfo)">Add to Cart</button>
+            <button class="btn btn-danger" [routerLink]="['/home']">Back</button>
+        </div>
     </div>
-    <div class="card-body">
-        <button class="btn btn-outline-success" (click)="addToCart(productInfo)">Add to Cart</button>
     </div>
-</div>
-<div class="details">
+    <script>
+        let cartItem = document.querySelector("cart_item");
+        let zoomDiv = document.querySelector(".zoom");
+        let zoomedImg = document.querySelector(".zoom>img");
+        cartItem.addEventListener("mousemove", (e)=>{
+            zoomDiv.style.display = "block"
+            let y = (e.clientY - 345)/(574 - 345)
+            let x = e.clientX/408;
+            console.log(x,y)
+            if(x>0.82){
+                x=0.82
+            }
+            if(y>0.64){
+                y=0.64
+            }
+            zoomedImg.style.transform = 'translate3d(-${1080*2.5*x}px, -${1920*y}px,0px)'
+        })
+        cartItem.addEventListener("mouseleave",()=>{
+            zoomDiv.style.display = "none"
+        })
+    </script>
 
-</div>
+
+

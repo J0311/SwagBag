@@ -1,0 +1,30 @@
+.container{
+    width: fit-content;
+    margin: auto;
+    justify-self: left;
+    display: flex;
+
+}
+.btn
+{
+    margin-left: 2%;
+}
+
+.zoom{
+    display: none;
+    border: 1px solid white;
+    height: 90 vh;
+    width: 76vw;
+    overflow: hidden;
+    background-color: transparent;
+}
+.zoom > img{
+    object-fit: contain;
+    height: 250%;
+    transform: translate3d(0px, 0px, 0px);
+}
+.cart_item{
+    object-fit: contain;
+    height: 25 vh;
+    margin-right: 10px;
+}
