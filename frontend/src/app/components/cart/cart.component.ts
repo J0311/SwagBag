@@ -81,29 +81,32 @@ export class CartComponent implements OnInit {
 
 
   removeFromCart(product: Product, quantity: number): void {
-    /*console.log(Product);
+    //console.log(Product);
     console.log(quantity);
-*/
+
+
 
     //const newProduct = Object.assign( product, {quantity: product.quantity-1})
     const index = this.products.findIndex(({product:p}) => p.id === product.id)
 
-    let newProduct = {
-      product: product,
-      quantity: --quantity
-      //quantity: this.products[index].quantity--
-    };
 
 
-    /*product.quantity=quantity--;
-    console.log(Product);
-    console.log(quantity);
-    console.log(product);
-    console.log(product.quantity);*/
+      let newProduct = {
+        product: product,
+        quantity: --quantity
+        //quantity: this.products[index].quantity--
+
+      };
+    //product.quantity=quantity--;
+
+
+
     this.products[index] = newProduct;
+    console.log(quantity);
 
     //add
     //product.quantity = newProduct.product.quantity
+
 
     if(quantity<1){
       this.products.pop();
