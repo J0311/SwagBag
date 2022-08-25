@@ -15,13 +15,14 @@ export class ProductCardComponent implements OnInit{
     product: Product,
     quantity: number
   }[] = [];
+
   subscription!: Subscription;
   totalPrice: number = 0;
 
   @Input() productInfo!: Product;
 
   constructor(private productService: ProductService) { }
-  
+
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
       (cart) => {
@@ -52,7 +53,7 @@ export class ProductCardComponent implements OnInit{
       }
     );
 
-    if(inCart == false){
+    if(inCart == false) {
       let newProduct = {
         product: product,
         quantity: 1
@@ -65,7 +66,6 @@ export class ProductCardComponent implements OnInit{
       }
       this.productService.setCart(cart);
     }
-      
   }
 
   ngOnDestroy() {
