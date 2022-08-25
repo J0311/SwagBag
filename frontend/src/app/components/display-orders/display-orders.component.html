@@ -1,7 +1,17 @@
 <app-navbar></app-navbar>
 
-<div *ngFor="let order of allOrders">
-    <app-order-card
-        [orderInfo]="order"
-    ></app-order-card> 
+<div *ngIf="allOrders.length > 0; else elseBlock">
+    <div *ngFor="let order of allOrders">
+        <app-order-card
+            [orderInfo]="order"
+        ></app-order-card> 
+    </div>
 </div>
+
+
+<ng-template #elseBlock>
+    <p>You don't have any orders</p>
+</ng-template>
+
+
+
