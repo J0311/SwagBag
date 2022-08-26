@@ -7,6 +7,7 @@ export class ProductReview {
   rating: number;
   title: string;
   review: string;
+  timestamp: Date;
 
   constructor(
     id: number,
@@ -15,7 +16,8 @@ export class ProductReview {
     reviewerName: String,
     rating: number,
     title: string,
-    review: string
+    review: string,
+    timestamp: Date
   ) {
     this.id = id;
     this.productId = productId;
@@ -24,5 +26,6 @@ export class ProductReview {
     this.rating = rating;
     this.title = title;
     this.review = review;
+    this.timestamp = timestamp;
   }
 }

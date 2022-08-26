@@ -67,7 +67,7 @@
             </div>
             <div>
               <p>Reviewer: {{ review.reviewerName }}</p>
-              <p>Aug 25 at 12:55 PM</p>
+              <p>{{ moment(review.timestamp).format("llll") }}</p>
             </div>
           </div>
           <p>

@@ -1,4 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 import { ProductReview } from './../../models/product-review';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -11,6 +12,7 @@ import { ProductReviewService } from './../../services/product-review.service';
 })
 export class ProductReviewComponent implements OnInit {
   loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
+  moment = moment;
 
   productId: number = 0;
   allProductReviews: ProductReview[] = [];
@@ -83,6 +85,7 @@ export class ProductReviewComponent implements OnInit {
       this.allProductReviews = this.allProductReviews.filter(
         (review) => review.id !== id
       );
+      this.calculateAverageRating();
     });
   }
 }
