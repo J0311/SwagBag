@@ -1,5 +1,14 @@
 .container {
-  width: 75%;
+  width: 95%;
+}
+
+.rating-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating-title > div {
+  width: 49%;
 }
 
 .review-data {
@@ -45,4 +54,23 @@
 
 .review-heading p {
   margin-bottom: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .rating-title {
+    flex-direction: column;
+  }
+
+  .rating-title > div {
+    width: 100%;
+  }
+
+  .review-data {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .review-data h4 {
+    font-size: 15px;
+  }
 }

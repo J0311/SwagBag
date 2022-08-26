@@ -1,24 +1,26 @@
 <div class="container">
   <form id="review-form" [formGroup]="reviewForm">
-    <div class="form-group">
-      <label for="inputRating">Product Rating</label>
-      <select class="form-control" formControlName="rating" id="inputRating">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="inputTitle">Review Title</label>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="title"
-        id="inputTitle"
-        placeholder="Enter Review Title"
-      />
+    <div class="rating-title">
+      <div class="form-group">
+        <label for="inputRating">Product Rating</label>
+        <select class="form-control" formControlName="rating" id="inputRating">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="inputTitle">Review Title</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="title"
+          id="inputTitle"
+          placeholder="Enter Review Title"
+        />
+      </div>
     </div>
     <div class="form-group">
       <label for="inputReview">Review</label>
