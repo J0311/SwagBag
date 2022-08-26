@@ -10,21 +10,13 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class CartComponent implements OnInit {
 
-  //added
-  cartCount!: number;
-
   products: {
     product: Product,
     quantity: number,
   }[] = [];
-  //add
- /* products: Product[] = [];*/
 
   totalPrice!: number;
   cartProducts: Product[] = [];
-
-  //added
-  @Input() productInfo!: Product;
 
 
   constructor(private productService: ProductService, private router: Router) { }
@@ -53,44 +45,32 @@ export class CartComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  //added
- /* removeFromCart(product: Product): void {
-    console.log(Product);
-
-
-    //const newProduct = Object.assign( product, {quantity: product.quantity-1})
-    const index = this.products.findIndex(({product:p}) => p.id === product.id)
-
-    let newProduct = {
-      product: product,
-      quantity: product.quantity--
-      //quantity: this.products[index].quantity--
-    };
-
-
-    this.products[index] = newProduct;
-
-    //add
-    //product.quantity = newProduct.product.quantity
-
-    if(product.quantity<1){
-      this.products.pop();
-    }
-
-  }*/
-
-
+/** This removeFromCart() method takes in 2 parameters from the cart.html document.
+ * The first parameter is the passedProduct which is defined in models/product.ts
+ * The second parameter is the quantity of this particular product inside the cart
+ */
   removeFromCart(passedProduct: Product, quantity: number): void {
-    //console.log(Product);
-    console.log(quantity);
-
-    //const newProduct = Object.assign( product, {quantity: product.quantity-1})
-    // const index = this.products.findIndex(({product:p}) => p.id === product.id)
 
 
+  /**
+   * Here we are declaring a constant variable called productToDecrement that cannot be modified.
+   * We are finding this variable by using the find() array method,which returns the first element
+   * in the provided array that satisfies the given condition passed through it.
+   * Which in our case we are passing in the condition to analyze the entire products array in your
+   * shopping cart and find the element that has the same id as the one passed (aka which button you
+   * click on the cart.html is the product id passed).
+   */
     const productToDecrement = this.products.find(product => product.product.id === passedProduct.id);
 
-    if(productToDecrement && productToDecrement.quantity > 1) productToDecrement.quantity--;
+  /**
+   * We are now setting a conditional if statement, that reads, if productToDecrement is truthy meaning
+   * it's not null, it should produce a productToDecrement.quantity and execute the if code-block. But if is falsy then this if statement
+   * will execute the else code-block instead.
+   * The if code-block just states, to decrease the productToDecrement.quantity by 1.
+   * The else code-block states, to remove that product from the entire products array.
+   *
+   */
+  if(productToDecrement && productToDecrement.quantity > 1) productToDecrement.quantity--;
     else {
       this.products = this.products.filter(product => product.product.id !== passedProduct.id);
       /**
@@ -98,37 +78,58 @@ export class CartComponent implements OnInit {
        * !== ===
        */
     }
+  /**
+   * here we are declaring the variable, we are setting this equal to the product service
+   * cart() method which returns all cart information
+   */
 
-    let cart = this.productService.cart
+  let cart = this.productService.cart
 
-    if(cart.cartCount > 1) cart.cartCount--;
+  /**
+   * if the cart.cartCount is greater than 1 remove 1 from the cart.cartCount.
+   * We are accessing this information by using the product service cart.
+   * else set the cart.cartCount to 0.
+   */
+
+  if(cart.cartCount > 1) cart.cartCount--;
     else cart.cartCount = 0;
-    cart.products = this.products;
+
+  /**
+   * put into the cart products, our products array
+   */
+  cart.products = this.products;
     // cart.totalPrice = cart.totalPrice - (productToDecrement ? productToDecrement.product.price : 0)
-    cart.totalPrice = cart.totalPrice - <any>productToDecrement?.product.price ?? 0;
-
-    this.productService.setCart(cart)
-
-    /**
-     *  isThisTrue ? doThis : doThat;
-     *  if(isThisTrue) {
-     *    doThis
-     *  }
-     *  else {doThat}
-     *
-     *  couldBeUndefined ?? 0
-     *  variable could be undefined... and if so take right side of statement
-     */
+  /**
+   * another way to write this is
+   *
+   * isThisTrue ? doThis : doThat;
+   *  if(isThisTrue) {
+   *    doThis
+   *  }
+   *  else {doThat}
+   *
+   * cart.totalPrice = cart.totalPrice - (productToDecrement ? productToDecrement.product.price : 0)
+   *
+   */
 
 
+  /**
+   * but we did it this way, the more efficent way
+   *
+   * couldBeUndefined ?? 0
+   *  variable could be undefined... and if so take right side of statement
+   */
+  cart.totalPrice = cart.totalPrice - <any>productToDecrement?.product.price ?? 0;
 
-    //passsedId = p3
-   // [{id: p1}, {id: p2}, {id: p3}]
 
-    /** [{id: p1}, {id: p2}, {id: p3}]
-     *     ^
-     *  p3 !== p1
-     */
+  /**
+   * finally setting this cart using the product service setCart() method
+   */
+
+  this.productService.setCart(cart)
+
+
+
 
     // const expampleProduct = {
     //   product: {
@@ -139,26 +140,10 @@ export class CartComponent implements OnInit {
     // }
 
 
-    //  let newProduct = {
-   //    product: product,
-      //  quantity: --quantity
-        //quantity: this.products[index].quantity--
-     // };
-    //product.quantity=quantity--;
-
-    // this.products[index] = newProduct;
-    console.log(quantity);
-
-    //add
-    //product.quantity = newProduct.product.quantity
-
     // if(quantity<1){
     //   this.products.pop();
     //   //POP :  GETS RID OF LAST ELEMENT IN ARRAY
     // }
 
   }
-
-
-
 }
