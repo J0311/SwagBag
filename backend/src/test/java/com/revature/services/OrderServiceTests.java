@@ -16,13 +16,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.revature.models.Order;
-import com.revature.models.Purchase;
-import com.revature.models.User;
 import com.revature.repositories.OrderRepository;
 
 @SpringBootTest
-<<<<<<< HEAD:backend/src/test/java/com/revature/services/OrderServiceTest.java
-public class OrderServiceTest {
+
+public class OrderServiceTests {
 
     @Autowired
     private OrderService orderService;
@@ -48,9 +46,6 @@ public class OrderServiceTest {
           
     }
 
-=======
-public class OrderServiceTests {
->>>>>>> 5226888be93dcb89bb043bfad678bf6abfd01a60:backend/src/test/java/com/revature/services/OrderServiceTests.java
     @Test
     void testDelete() {
 
