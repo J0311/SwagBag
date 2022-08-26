@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-reset-password',
@@ -14,7 +15,7 @@ export class ResetPasswordComponent {
     password: new FormControl('')
   })
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
 
@@ -26,9 +27,11 @@ export class ResetPasswordComponent {
     // const fEmail = formValues.email;
     // const fPassword = formValues.password;
     // const {email, password} = this.resetPasswordForm.value;
-    this.authService.resetPassword(formValues).subscribe((formValuesReturned) => {
-      console.log(formValuesReturned, 'Form returned')
-    })
+    this.authService.resetPassword(formValues).subscribe((formValuesReturned) =>
+      console.log(formValuesReturned, 'Form returned'),
+        (err) => console.log(err),
+        () => this.router.navigate(['login'])
+    )
   }
 
 }

@@ -146,4 +146,21 @@ export class CartComponent implements OnInit {
     // }
 
   }
+
+  addToCart(passedProduct: Product){
+
+    const productToIncrement = this.products.find(product => product.product.id === passedProduct.id);
+
+    let cart = this.productService.cart
+
+    if(productToIncrement && productToIncrement.quantity < productToIncrement.product.quantity) {
+      productToIncrement.quantity++;
+    cart.cartCount++;
+      cart.totalPrice = cart.totalPrice + <any>productToIncrement?.product.price ?? 0;
+    }
+
+    cart.products = this.products;
+    this.productService.setCart(cart)
+
+  }
 }

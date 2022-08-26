@@ -12,10 +12,9 @@
         <tr *ngFor="let product of products;">
             <td>{{product.product.id}}</td>
             <td>{{product.product.name}}</td>
-            <td>{{product.quantity}}</td>
+            <td><button class="btn btn-success" class="sb"  (click)="addToCart(product.product)">+</button>{{product.quantity}} <button class="btn btn-danger" class="sb2"  (click)="removeFromCart(product.product, product.quantity)">-</button></td>
             <td>{{product.product.description}}</td>
-          //added
-          <td><button class="btn btn-outline-success" (click)="removeFromCart(product.product, product.quantity)">Remove from Cart</button></td>
+          <!--<td><button class="btn btn-outline-success" (click)="removeFromCart(product.product, product.quantity)">Remove from Cart</button></td>-->
         </tr>
     </tbody>
 </table>
