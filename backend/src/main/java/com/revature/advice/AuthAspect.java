@@ -1,6 +1,5 @@
 package com.revature.advice;
 
-import com.revature.annotations.AuthRestriction;
 import com.revature.annotations.Authorized;
 import com.revature.exceptions.NotLoggedInException;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -36,8 +35,10 @@ public class AuthAspect {
     // Example:
     // User loggedInUser = (User) session.getAttribute("user");
     // Role userRole = loggedInUser.getRole();
-    // if(authorized.value().equals(AuthRestriction.Manager) && !Role.Manager.equals(userRole)) {
-    //     throw new InvalidRoleException("Must be logged in as a Manager to perform this action");
+    // if(authorized.value().equals(AuthRestriction.Manager) &&
+    // !Role.Manager.equals(userRole)) {
+    // throw new InvalidRoleException("Must be logged in as a Manager to perform
+    // this action");
     // }
     // Then the RestExceptionHandler class can be expanded to include
     // @ExceptionHandler(InvalidRoleException.class)
@@ -50,7 +51,7 @@ public class AuthAspect {
         HttpSession session = req.getSession(); // Get the session (or create one)
 
         // If the user is not logged in
-        if(session.getAttribute("user") == null) {
+        if (session.getAttribute("user") == null) {
             throw new NotLoggedInException("Must be logged in to perform this action");
         }
 

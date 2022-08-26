@@ -1,15 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { Subscription, Observable, Observer } from 'rxjs';
+import { findIndex, tap } from 'rxjs/operators';
+import {} from 'src/app/components/navbar/navbar.component';
 
 @Component({
-  selector: 'app-product-card',
-  templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.css'],
+  selector: 'app-product-details',
+  templateUrl: './product-details.component.html',
+  styleUrls: ['./product-details.component.css'],
 })
-export class ProductCardComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit {
+  productId: number = 0;
+  productInfo!: Product;
+
   cartCount!: number;
   products: {
     product: Product;
@@ -18,11 +25,23 @@ export class ProductCardComponent implements OnInit {
   subscription!: Subscription;
   totalPrice: number = 0;
 
-  @Input() productInfo!: Product;
-
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(
+    private productService: ProductService,
+    private router: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    //gets product id from homepage when view button is clicked
+    this.productId = parseInt(
+      this.router.snapshot.paramMap.get('id') || '',
+      10
+    );
+
+    //sets this instance of product info equal to the product id
+    this.productService.getSingleProduct(this.productId).subscribe((data) => {
+      this.productInfo = data;
+    });
+
     this.subscription = this.productService.getCart().subscribe((cart) => {
       this.cartCount = cart.cartCount;
       this.products = cart.products;
@@ -60,14 +79,5 @@ export class ProductCardComponent implements OnInit {
       };
       this.productService.setCart(cart);
     }
-  }
-
-  navigateToProductPage(product: Product): void {
-    // This will move you to the route for the product with ID of this product's ID
-    this.router.navigate(['/product', product.id]);
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }
