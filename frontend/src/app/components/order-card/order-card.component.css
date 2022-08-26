@@ -1,32 +1,64 @@
-div.gallery {
-    text-align: center;
-    margin: 5px;
-    border: 1px solid #ccc;
-    float: left;
-    width: 180px;
-  }
-  
-  div.gallery:hover {
-    border: 1px solid #777;
-  }
-  
-  div.gallery img {
-    width: 100%;
-    height: auto;
-  }
-  
-  div.desc {
-    padding: 15px;
-    text-align: center;
-  }
-
-.contain{
-    width:100%;
-    display: flexbox;
-    justify-content: center;
-    margin-left: 30%;
+.order-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 }
 
-p { color: #7a7c7f; font-family: "Libre Baskerville", serif; text-shadow: 0 1px 1px #fff;}
+.details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.purchase {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+}
+
+.purchase-image {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.purchase-summary {
+  flex: 1 1 0;
+}
+
+.purchase-desc {
+  flex: 4 1 0;
+}
+
+.purchase-desc, .purchase-summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5em 1em;
+}
+  
+.purchase:hover {
+  border: 1px solid #777;
+}
+  
+.purchase-image img {
+  width: 100%;
+  max-width: 100px;
+  height: auto;
+  object-fit: contain;
+}
+
+p { 
+  margin: unset;
+  color: #7a7c7f; 
+  font-family: "Libre Baskerville", serif; 
+  text-shadow: 0 1px 1px #fff;
+}
 
 p.byline { font-style: italic; color: #B6B6B6;  text-shadow: 0 1px 1px #fff; }
