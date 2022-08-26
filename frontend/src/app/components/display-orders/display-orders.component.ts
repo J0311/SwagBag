@@ -10,7 +10,6 @@ import { OrderService } from 'src/app/services/order.service';
 export class DisplayOrdersComponent implements OnInit {
 
   allOrders: Order[] = [];
-
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
