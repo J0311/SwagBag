@@ -1,8 +1,10 @@
 package com.revature.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import com.revature.dtos.ProductReviewRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.annotations.Authorized;
 import com.revature.models.ProductReview;
 import com.revature.services.ProductReviewService;
+
+import static java.time.LocalDateTime.*;
 
 @RestController
 @RequestMapping("/api/product-reviews")
@@ -40,16 +44,21 @@ public class ProductReviewController {
     public ResponseEntity<ProductReview> getById(@PathVariable("id") int id) {
         Optional<ProductReview> optional = productReviewService.findById(id);
 
-        if (!optional.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
+        return optional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 
-        return ResponseEntity.ok(optional.get());
     }
 
     @Authorized
     @PostMapping
-    public ResponseEntity<ProductReview> save(@RequestBody ProductReview productReview) {
+    public ResponseEntity<ProductReview> save(@RequestBody ProductReviewRequest productReviewRequest) {
+        ProductReview productReview = new ProductReview(0,
+                productReviewRequest.getProductId(),
+                productReviewRequest.getReviewerId(),
+                productReviewRequest.getReviewerName(),
+                now(),
+                productReviewRequest.getRating(),
+                productReviewRequest.getTitle(),
+                productReviewRequest.getReview());
         return ResponseEntity.status(HttpStatus.CREATED).body(productReviewService.save(productReview));
     }
 
