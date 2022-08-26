@@ -1,10 +1,12 @@
 package com.revature.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.aspectj.lang.annotation.Before;
 import org.assertj.core.util.Arrays;
@@ -64,11 +66,15 @@ public class OrderServiceTests {
 
     @Test
     void testFindAllByUserId() {
+        List<Order> expectedList = orderService.findAllByUserId(1);
+        assertEquals(expectedList.size(), orderList.size());
 
     }
 
     @Test
     void testFindById() {
+        Optional<Order> expectedList = orderService.findById(1);
+        assertTrue(expectedList.isPresent());
 
     }
 
