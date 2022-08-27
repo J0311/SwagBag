@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {observable, Observable, of} from 'rxjs';
 import {environment} from 'src/environments/environment';
 
 @Injectable({
@@ -38,5 +38,14 @@ export class AuthService {
     `)
     return of(form)
     // return this.http.post<any>(`${this.authUrl}/reset-password`, form, {headers: environment.headers})
+  }
+
+  changePassword(form: { oldPassword: string, newPassword: string }): Observable<any> {
+    alert(`Password Changed! Success!
+    Email: ${form.oldPassword}
+    Password: ${form.newPassword}
+    `)
+    return of(form)
+    // return this.http.post<any>(`${this.authUrl}/change-password`, form, {headers: environment.headers})
   }
 }
