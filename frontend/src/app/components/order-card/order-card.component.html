@@ -1,0 +1,22 @@
+<div class="order-container">
+    <div class="details">
+        <p><b>Order #{{orderInfo.orderId}}</b> placed on {{orderInfo.purchaseTime | date:'mediumDate'}} at {{orderInfo.purchaseTime | date:'mediumTime'}}</p>
+        <p><b>Order Total:</b> {{orderTotal | currency}}</p>
+    </div>
+    <div>
+        <div class="purchase" *ngFor="let purchase of orderInfo.purchases;">
+            <div class="purchase-image">
+                <img [src]="purchase.product.image">
+            </div>
+            <div class="purchase-desc">
+                <p><b>{{purchase.product.name}}</b></p>
+                <p>{{purchase.product.description}}</p>
+            </div>
+            <div class="purchase-summary">
+                <p><b>Qty:</b> {{purchase.quantity}}</p>
+                <p>{{purchase.pricePerItem | currency}}/ea</p>
+            </div>
+        </div>
+    </div>
+</div>
+
