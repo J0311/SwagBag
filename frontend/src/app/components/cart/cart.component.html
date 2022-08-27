@@ -1,22 +1,36 @@
 <app-navbar></app-navbar>
 <table class="table table-striped" id="cart-table">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Description</th>
-      </tr>
-    </thead>
-    <tbody id="cart-table-body">
-        <tr *ngFor="let product of products;">
-            <td>{{product.product.id}}</td>
-            <td>{{product.product.name}}</td>
-            <td><button class="btn btn-success" class="sb"  (click)="addToCart(product.product)">+</button>{{product.quantity}} <button class="btn btn-danger" class="sb2"  (click)="removeFromCart(product.product, product.quantity)">-</button></td>
-            <td>{{product.product.description}}</td>
-          <!--<td><button class="btn btn-outline-success" (click)="removeFromCart(product.product, product.quantity)">Remove from Cart</button></td>-->
-        </tr>
-    </tbody>
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Quantity</th>
+    <th scope="col">Description</th>
+  </tr>
+  </thead>
+  <tbody id="cart-table-body">
+  <tr *ngFor="let product of products;">
+    <td>{{product.product.id}}</td>
+    <td>{{product.product.name}}</td>
+    <td>
+      <button class="btn btn-success button-small" (click)="addToCart(product.product)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
+             viewBox="0 0 16 16">
+          <path
+            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+      </button>
+      {{product.quantity}}
+      <button class="btn btn-danger button-small" (click)="removeFromCart(product.product, product.quantity)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+        </svg>
+      </button>
+    </td>
+    <td>{{product.product.description}}</td>
+    <!--<td><button class="btn btn-outline-success" (click)="removeFromCart(product.product, product.quantity)">Remove from Cart</button></td>-->
+  </tr>
+  </tbody>
 </table>
 <button class="btn btn-danger" [routerLink]="['/home']">Back</button>
 <button class="btn btn-warning" (click)="emptyCart()">Empty Cart</button>
