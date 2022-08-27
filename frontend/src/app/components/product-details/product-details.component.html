@@ -1,10 +1,12 @@
-<div class="cards">
-  <div class="card">
-    <img class="card-img-top" [src]="productInfo.image" alt="Card image cap" />
-    <div class="card-body">
-      <h5 class="card-title">{{ productInfo.name }}</h5>
-      <p class="card-text">{{ productInfo.description }}</p>
-    </div>
+<app-navbar></app-navbar>
+<div class="container">
+  <img [src]="productInfo?.image" />
+
+  <div class="details">
+    <h5>{{ productInfo?.name }}</h5>
+    <p>
+      {{ productInfo?.description }}
+    </p>
     <div class="input-group input-group-sm mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
@@ -13,7 +15,7 @@
         type="number"
         class="form-control"
         aria-label="Sizing example input"
-        [value]="productInfo.price"
+        [value]="productInfo?.price"
         aria-describedby="inputGroup-sizing-sm"
         disabled
       />
@@ -28,21 +30,19 @@
         type="number"
         class="form-control"
         aria-label="Sizing example input"
-        [value]="productInfo.quantity"
+        [value]="productInfo?.quantity"
         aria-describedby="inputGroup-sizing-sm"
         disabled
       />
     </div>
-    <div class="card-footer">
-      <button class="btn btn-outline-success" (click)="addToCart(productInfo)">
-        Add to Cart
+    <div class="details-btns">
+      <button class="btn btn-outline-danger" [routerLink]="['/home']">
+        Back
       </button>
-      <button
-        class="btn btn-outline-success"
-        (click)="navigateToProductPage(productInfo)"
-      >
-        View
+      <button class="btn btn-success" (click)="addToCart(productInfo)">
+        Add to Cart
       </button>
     </div>
   </div>
 </div>
+<app-product-review></app-product-review>
