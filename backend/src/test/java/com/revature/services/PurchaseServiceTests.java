@@ -17,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.revature.models.Purchase;
 import com.revature.repositories.PurchaseRepository;
 
-@ContextConfiguration(classes = {PurchaseService.class})
+@ContextConfiguration(classes = { PurchaseService.class })
 @ExtendWith(SpringExtension.class)
 public class PurchaseServiceTests {
 
@@ -34,18 +34,18 @@ public class PurchaseServiceTests {
         testPurchases = new ArrayList<Purchase>();
         testPurchases.add(0, new Purchase(0, null, null, 7, 10.50F));
         testPurchases.add(1, new Purchase(1, null, null, 18, 94.99F));
-        Mockito.when(purchaseRepository.save(Mockito.any())).thenReturn(testPurchases.get(0));
-        Mockito.when(purchaseRepository.saveAll(Mockito.any())).thenReturn(testPurchases);
     }
 
     @Test
     void testSave() {
+        Mockito.when(purchaseRepository.save(Mockito.any())).thenReturn(testPurchases.get(0));
         Purchase saved = purchaseService.save(testPurchases.get(0));
         assertEquals(testPurchases.get(0).getQuantity(), saved.getQuantity());
     }
 
     @Test
     void testSaveAll() {
+        Mockito.when(purchaseRepository.saveAll(Mockito.any())).thenReturn(testPurchases);
         List<Purchase> savedList = purchaseService.saveAll(testPurchases);
         assertEquals(testPurchases.size(), savedList.size());
     }
