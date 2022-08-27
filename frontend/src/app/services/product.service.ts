@@ -28,6 +28,10 @@ export class ProductService {
 
   private _cart$ = this._cart.asObservable();
 
+  get cart(): Cart {
+    return this._cart.getValue();
+  }
+
   getCart(): Observable<Cart> {
     return this._cart$;
   }
