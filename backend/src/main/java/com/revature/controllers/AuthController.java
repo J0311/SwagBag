@@ -13,7 +13,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "${environment.allowed-origin}", allowCredentials = "true")
+@CrossOrigin(origins = { "http://localhost:4200",
+        "http://swagbag.us-east-1.elasticbeanstalk.com" }, allowCredentials = "true")
 public class AuthController {
 
     private final AuthService authService;

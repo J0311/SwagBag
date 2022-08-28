@@ -1,5 +1,3 @@
-environment:
-  allowed-origin: http://swagbag.us-east-1.elasticbeanstalk.com
 spring:
   jpa:
     hibernate:

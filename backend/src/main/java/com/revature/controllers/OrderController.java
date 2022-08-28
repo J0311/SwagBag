@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/order")
-@CrossOrigin(origins = "${environment.allowed-origin}", allowCredentials = "true")
+@CrossOrigin(origins = { "http://localhost:4200",
+        "http://swagbag.us-east-1.elasticbeanstalk.com" }, allowCredentials = "true")
 public class OrderController {
 
     private final OrderService orderService;

@@ -1,5 +1,3 @@
-environment:
-  allowed-origin: http://localhost:4200
 spring:
   jpa:
     hibernate:
