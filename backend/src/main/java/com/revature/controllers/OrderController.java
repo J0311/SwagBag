@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/order")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = "${environment.allowed-origin}", allowCredentials = "true")
 public class OrderController {
 
     private final OrderService orderService;
@@ -33,6 +33,5 @@ public class OrderController {
         User user = (User) session.getAttribute("user");
         return ResponseEntity.ok(orderService.findAllByUserId(user.getId()));
     }
-   
-    
+
 }

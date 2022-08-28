@@ -23,14 +23,15 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/product")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = "${environment.allowed-origin}", allowCredentials = "true")
 public class ProductController {
 
     private final ProductService productService;
     private final OrderService orderService;
     private final PurchaseService purchaseService;
 
-    public ProductController(ProductService productService, OrderService orderService, PurchaseService purchaseService) {
+    public ProductController(ProductService productService, OrderService orderService,
+            PurchaseService purchaseService) {
         this.productService = productService;
         this.orderService = orderService;
         this.purchaseService = purchaseService;
@@ -47,7 +48,7 @@ public class ProductController {
     public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
 
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(optional.get());
@@ -62,7 +63,7 @@ public class ProductController {
     @Authorized
     @PatchMapping
     public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata, HttpServletRequest req) {
-        
+
         // Get the user making the purchase
         HttpSession session = req.getSession();
         if (session.getAttribute("user") == null) {
@@ -70,29 +71,29 @@ public class ProductController {
         }
         User user = (User) session.getAttribute("user");
 
-    	List<Product> productList = new ArrayList<Product>();
+        List<Product> productList = new ArrayList<Product>();
         List<Purchase> purchaseList = new ArrayList<Purchase>();
         Order order = new Order(0, user, LocalDateTime.now(), null);
-    
-    	for (int i = 0; i < metadata.size(); i++) {
-    		Optional<Product> optional = productService.findById(metadata.get(i).getId());
-            
-    		if(!optional.isPresent()) {
-    			return ResponseEntity.notFound().build();
-    		}
 
-    		Product product = optional.get();
+        for (int i = 0; i < metadata.size(); i++) {
+            Optional<Product> optional = productService.findById(metadata.get(i).getId());
+
+            if (!optional.isPresent()) {
+                return ResponseEntity.notFound().build();
+            }
+
+            Product product = optional.get();
             int quantity = metadata.get(i).getQuantity();
             Purchase purchase = new Purchase(0, order, product, quantity, product.getPrice());
 
-    		if(product.getQuantity() - quantity < 0) {
-    			return ResponseEntity.badRequest().build();
-    		}
+            if (product.getQuantity() - quantity < 0) {
+                return ResponseEntity.badRequest().build();
+            }
 
-    		product.setQuantity(product.getQuantity() - metadata.get(i).getQuantity());
-    		productList.add(product);
+            product.setQuantity(product.getQuantity() - metadata.get(i).getQuantity());
+            productList.add(product);
             purchaseList.add(purchase);
-    	}
+        }
 
         productService.saveAll(productList, metadata);
         orderService.save(order);
@@ -106,7 +107,7 @@ public class ProductController {
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
 
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
         productService.delete(id);

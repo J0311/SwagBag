@@ -24,7 +24,7 @@ import static java.time.LocalDateTime.*;
 
 @RestController
 @RequestMapping("/api/product-reviews")
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000" }, allowCredentials = "true")
+@CrossOrigin(origins = "${environment.allowed-origin}", allowCredentials = "true")
 public class ProductReviewController {
     private final ProductReviewService productReviewService;
 
