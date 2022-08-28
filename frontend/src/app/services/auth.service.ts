@@ -1,7 +1,7 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {environment} from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -49,14 +49,5 @@ export class AuthService {
     return this.http.post<any>(`${this.authUrl}/register`, payload, {
       headers: environment.headers,
     });
-  }
-
-  resetPassword(form: { email: string, password: string }): Observable<any> {
-    alert(`Password Changed! Success!
-    Email: ${form.email}
-    Password: ${form.password}
-    `)
-    return of(form)
-    // return this.http.post<any>(`${this.authUrl}/reset-password`, form, {headers: environment.headers})
   }
 }
