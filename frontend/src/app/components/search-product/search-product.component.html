@@ -1,0 +1,14 @@
+<p>search-product works!</p>
+<app-navbar></app-navbar>
+<p><input type="text" name="search" id="search" placeholder="search" [(ngModel)]="searchProduct"></p>
+<button type="button" (click)="clickme()" >Search</button>
+<div class="container">
+    <div class="row align-items-start">
+       <div class="col" *ngFor="let product of sProducts">
+            <app-product-card
+                class="cardListItem"
+                [productInfo]="product"
+            ></app-product-card> 
+        </div> 
+    </div>
+</div> 
