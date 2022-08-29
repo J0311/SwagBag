@@ -71,9 +71,8 @@
 }
   
 .purchase-image img {
-  width: 100%;
-  max-width: 100px;
-  height: auto;
+  height: 100%;
+  max-height: 80px;
   object-fit: contain;
   margin: 3px;
 }
