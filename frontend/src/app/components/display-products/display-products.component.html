@@ -1,6 +1,6 @@
 <app-navbar (searchEvent)="search($event)"></app-navbar>
 <div class="container">
-    <div class="row align-items-start">
+    <div *ngIf="allProducts.length > 0; else emptyProducts" class="row align-items-start">
        <div class="col" *ngFor="let product of allProducts">
             <app-product-card
                 class="cardListItem"
@@ -8,4 +8,7 @@
             ></app-product-card> 
         </div> 
     </div>
+    <ng-template #emptyProducts>
+        <p class="empty-products">No products found</p>
+    </ng-template>
 </div>
