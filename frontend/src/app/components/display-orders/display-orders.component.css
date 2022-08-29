@@ -17,6 +17,11 @@
   width: 70%;
 }
 
+#orders-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
 /* small size viewport */
 @media screen and (max-width: 640px) {
   .orders-container-item {
