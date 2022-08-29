@@ -1,7 +1,6 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -16,10 +15,9 @@ export class NavbarComponent implements OnInit{
   cartCount!: number;
   subscription!: Subscription;
 
-  searchProduct: String ='';
-  sProducts: Product [] = [];
+  @Output() searchEvent = new EventEmitter<string>();
 
-  constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
+  constructor(private authService: AuthService, public router: Router, private productService: ProductService) { }
   
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
@@ -36,13 +34,7 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['login']);
   }
 
-  clickme() {
-    
-   /** this.productService.getSearchedProducts(this.searchProduct).subscribe(
-     (resp) => this.sProducts = resp,
-     (err) => console.log(err),
-     () => console.log("Retrieving Searched Products"+this.searchProduct)
-   )*/
-  this.router.navigate(['search']); 
+  search(query: string) {
+    this.searchEvent.emit(query);
   }
 }
