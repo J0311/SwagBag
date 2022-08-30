@@ -63,6 +63,12 @@
   flex: 4 1 0;
 }
 
+.purchase-desc p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .purchase-desc, .purchase-summary {
   display: flex;
   flex-direction: column;
