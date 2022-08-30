@@ -7,9 +7,11 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { DisplayOrdersComponent } from './components/display-orders/display-orders.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { AuthGuard } from './guards/auth.guard';
 import { IsSignedInGuard } from './guards/is-signed-in.guard';
 import { IsCustomerGuard } from './guards/is-customer.guard';
+import { IsAdminGuard } from './guards/is-admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -43,6 +45,11 @@ const routes: Routes = [
     path: 'orders',
     component: DisplayOrdersComponent,
     canActivate: [AuthGuard, IsCustomerGuard],
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard, IsAdminGuard],
   },
 ];
 

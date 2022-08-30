@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -9,7 +10,7 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   authUrl: string = `${environment.baseUrl}/auth`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getLoggedInUser(): any {
     return sessionStorage.getItem('loggedInUser')
@@ -28,6 +29,8 @@ export class AuthService {
         'loggedInUser',
         JSON.stringify({ id: data.id, name: data.firstName, role: data.role })
       );
+
+      this.router.navigate(['/home']);
     });
 
     return res;
