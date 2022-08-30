@@ -4,10 +4,7 @@
         Revature Swag Shop
     </h4>
     <form class="form-inline">
-        <ng-template [ngIf]="url === '/home'">
-            <input type="text" name="search" placeholder="Search" #queryInput>
-            <button type="button" (click)="search(queryInput.value)">Search</button>
-        </ng-template>
+        <input *ngIf="url==='/home'" type="text" name="search" placeholder="Search" #queryInput (input)="search(queryInput.value)">
         <button class="btn btn-light" [routerLink]="['/orders']">Order History</button>
         <button class="btn btn-light" [routerLink]="['/cart']">
             Cart
