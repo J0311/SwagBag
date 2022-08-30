@@ -1,12 +1,12 @@
 <nav class="bg-light">
-  <div class="logo">
+  <div class="logo" [routerLink]="['/home']">
     <img
       src="../../../assets/images/favicon.png"
       width="8%"
       height="8%"
       alt="Revature"
     />
-    <h5 [routerLink]="['/home']">Revature Swag Shop</h5>
+    <h5>Revature Swag Shop</h5>
   </div>
   <div class="nav-links">
     <button class="btn btn-light" [routerLink]="['/cart']">

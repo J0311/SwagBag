@@ -6,7 +6,7 @@
 }
 
 .card {
-  min-width: 275px;
+  min-width: 300px;
   max-width: 200px;
   height: fit-content;
   transition: 0.2s ease-out;
@@ -36,4 +36,10 @@ div {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 0;
+  }
 }
