@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit{
 
   @Output() searchEvent = new EventEmitter<string>();
 
-  constructor(private authService: AuthService, public router: Router, private productService: ProductService) { }
+  constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
   
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
@@ -27,6 +27,10 @@ export class NavbarComponent implements OnInit{
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  get url() {
+    return this.router.url;
   }
 
   logout() {
