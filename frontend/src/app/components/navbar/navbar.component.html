@@ -9,13 +9,26 @@
     <h5>Revature Swag Shop</h5>
   </div>
   <div class="nav-links">
-    <button class="btn btn-light" [routerLink]="['/cart']">
+    <button
+      *ngIf="loggedInUser?.role !== 'ADMIN'"
+      class="btn btn-light"
+      [routerLink]="['/cart']"
+    >
       Cart
       <span class="badge badge-info">{{ cartCount }}</span>
     </button>
-    <button class="btn btn-light" [routerLink]="['/orders']">
-      Order History
+    <button
+      *ngIf="loggedInUser?.role === 'ADMIN'; else orders"
+      class="btn btn-light"
+      [routerLink]="['/admin']"
+    >
+      Admin
     </button>
+    <ng-template #orders>
+      <button class="btn btn-light" [routerLink]="['/orders']">
+        Order History
+      </button>
+    </ng-template>
     <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()">
       Logout
     </button>

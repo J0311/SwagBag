@@ -7,19 +7,23 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit{
-
+export class NavbarComponent implements OnInit {
   cartCount!: number;
   subscription!: Subscription;
+  loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
 
-  constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
-  
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private productService: ProductService
+  ) {}
+
   ngOnInit(): void {
-    this.subscription = this.productService.getCart().subscribe(
-      (cart) => this.cartCount = cart.cartCount
-    );
+    this.subscription = this.productService
+      .getCart()
+      .subscribe((cart) => (this.cartCount = cart.cartCount));
   }
 
   ngOnDestroy() {
@@ -30,5 +34,4 @@ export class NavbarComponent implements OnInit{
     this.authService.logout();
     this.router.navigate(['login']);
   }
-
 }

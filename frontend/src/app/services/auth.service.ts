@@ -8,9 +8,14 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   authUrl: string = `${environment.baseUrl}/auth`;
-  loggedIn: boolean = false;
 
   constructor(private http: HttpClient) {}
+
+  getLoggedInUser(): any {
+    return sessionStorage.getItem('loggedInUser')
+      ? JSON.parse(sessionStorage.getItem('loggedInUser') || '')
+      : null;
+  }
 
   login(email: string, password: string): Observable<any> {
     const payload = { email: email, password: password };
@@ -19,10 +24,9 @@ export class AuthService {
       withCredentials: environment.withCredentials,
     });
     res.subscribe((data) => {
-      this.loggedIn = true;
       sessionStorage.setItem(
         'loggedInUser',
-        JSON.stringify({ id: data.id, name: data.firstName })
+        JSON.stringify({ id: data.id, name: data.firstName, role: data.role })
       );
     });
 
