@@ -16,6 +16,7 @@ import {} from 'src/app/components/navbar/navbar.component';
 export class ProductDetailsComponent implements OnInit {
   productId: number = 0;
   productInfo!: Product;
+  loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
 
   cartCount!: number;
   products: {

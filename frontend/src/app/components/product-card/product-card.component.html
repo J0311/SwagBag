@@ -34,11 +34,15 @@
       />
     </div>
     <div class="card-footer">
-      <button class="btn btn-outline-success" (click)="addToCart(productInfo)">
+      <button
+        *ngIf="loggedInUser?.role === 'CUSTOMER'"
+        class="btn btn-outline-success"
+        (click)="addToCart(productInfo)"
+      >
         Add to Cart
       </button>
       <button
-        class="btn btn-outline-success"
+        class="btn btn-outline-success ml-auto"
         (click)="navigateToProductPage(productInfo)"
       >
         View

@@ -13,6 +13,12 @@
   margin-bottom: 20px;
 }
 
+.card-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 img {
   justify-content: center;
   height: auto;
