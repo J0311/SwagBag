@@ -50,6 +50,31 @@
         placeholder="Enter Password"
       />
     </div>
+    <div>
+      <input
+        type="checkbox"
+        class="mr-2 text-align-center"
+        formControlName="adminChecked"
+        id="adminCheckbox"
+        value="Admin"
+      />
+      <label
+        style="font-size: 16px; position: relative; top: -2px"
+        for="adminCheckbox"
+        >Admin</label
+      >
+    </div>
+    <div *ngIf="registerForm.get('adminChecked')?.value" class="form-group">
+      <label for="inputSecret">Access Code (required)</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="accessCode"
+        id="inputSecret"
+        placeholder="Enter Access Code"
+      />
+    </div>
+
     <button class="btn btn-primary" (click)="onSubmit()">Register</button>
     <button class="btn btn-secondary" [routerLink]="['/login']">Login</button>
   </form>
