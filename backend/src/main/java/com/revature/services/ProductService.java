@@ -37,10 +37,6 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-   // public List<Product> getSearchedProducts(){
-   //     return productRepository.findAll();
-   // }
-
     public List<Product> getSearchedProducts(String kw){
         System.out.println("size of searched product list" +productRepository.getSearchedProducts(kw).size());
         return productRepository.getSearchedProducts(kw);
