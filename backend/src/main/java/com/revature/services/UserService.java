@@ -22,4 +22,13 @@ public class UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
+
+    /**
+     * to find user by id
+     * @param userId
+     * @return
+     */
+    public Optional<User> findById(int userId){
+        return userRepository.findById(userId);
+    }
 }
