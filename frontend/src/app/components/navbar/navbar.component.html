@@ -19,7 +19,7 @@
     </button>
     <button
       *ngIf="loggedInUser?.role === 'ADMIN'; else orders"
-      class="btn btn-light"
+      class="btn btn-outline-primary"
       [routerLink]="['/admin']"
     >
       Admin
