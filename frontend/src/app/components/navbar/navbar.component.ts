@@ -12,9 +12,11 @@ import { ProductService } from 'src/app/services/product.service';
 @Injectable()
 export class NavbarComponent implements OnInit{
 
+  private _url!: string;
+  private _loggedInUser!: Object;
   cartCount!: number;
   subscription!: Subscription;
-
+  
   @Output() searchEvent = new EventEmitter<string>();
 
   constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
@@ -31,6 +33,11 @@ export class NavbarComponent implements OnInit{
 
   get url() {
     return this.router.url;
+  }
+
+  get loggedInUser() {
+    let user = sessionStorage.getItem('loggedInUser');
+    return user ? JSON.parse(user) : null;
   }
 
   logout() {
