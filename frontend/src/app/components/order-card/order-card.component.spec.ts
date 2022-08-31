@@ -61,7 +61,7 @@ describe('OrderCardComponent', () => {
         expect(fixture.ngOnChanges).toBeTruthy;
     });
 
-    it('should render `Hello World!`', () => {
+    it('should return order total', () => {
         
         orderTotal1.orderInfo = order;
 
