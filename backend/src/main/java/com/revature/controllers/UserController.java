@@ -23,7 +23,7 @@ public class UserController {
 
     @Authorized
     @PatchMapping("/change-password")
-    public ResponseEntity<User> resetPassword(@RequestBody ChangePasswordRequest changePasswordRequest, HttpServletRequest request) {
+    public ResponseEntity<User> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest, HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (session.getAttribute("user") == null) {
             return ResponseEntity.badRequest().build();
