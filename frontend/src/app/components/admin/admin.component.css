@@ -1,0 +1,34 @@
+.container {
+  max-width: 875px;
+}
+
+td:nth-child(2) {
+  max-width: 450px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 850px) {
+  .container {
+    max-width: 95%;
+  }
+
+  button {
+    font-size: small;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  button:not(:nth-child(1)) {
+    margin: 0 !important;
+    margin-top: 5px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  table {
+    table-layout: fixed;
+  }
+}

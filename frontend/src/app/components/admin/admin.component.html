@@ -1,1 +1,43 @@
-<p>admin works!</p>
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-3">
+      <h3>Hello, {{ loggedInUser.name }}!</h3>
+      <p>
+        Here you can view, edit or delete products by clicking the appropriate
+        action button. You can also
+        <a routerLink="/admin">add a new product</a> or go
+        <a routerLink="/home">back to home</a>.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of allProducts">
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>
+              <button
+                class="btn btn-outline-info"
+                [routerLink]="['/product', product.id]"
+              >
+                View
+              </button>
+              <button class="btn btn-outline-primary ml-3">Edit</button>
+              <button class="btn btn-outline-danger ml-3">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
