@@ -1,25 +1,32 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangePasswordComponent } from "./change-password.component";
 
-import { ChangePasswordComponent } from './change-password.component';
+describe( 'ChangePasswordComponent', () => {
+	let fixture: ChangePasswordComponent;
+    let authServiceMock;
+	let routereMock;
+	
+    beforeEach( () => {
+	
+		fixture = new ChangePasswordComponent(
+            authServiceMock,
+            routereMock
+			
+		);
+	});
 
-describe('ChangePasswordComponent', () => {
-  let component: ChangePasswordComponent;
-  let fixture: ComponentFixture<ChangePasswordComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ChangePasswordComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ChangePasswordComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    describe( 'submitPassForm', () => {
+        it( 'should NOT call submitWorker', () => {
+    });
+    describe( 'submitWorkerForm', () => {
+    });
+    describe( 'submitWorkerForm', () => {
+    });
+    describe( 'submitWorkerForm', () => {
+    });
+    describe( 'submitWorkerForm', () => {
+    });
+    describe( 'submitWorkerForm', () => {
+    });
+    describe( 'submitWorkerForm', () => {
+    });
 });

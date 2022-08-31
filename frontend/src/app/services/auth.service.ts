@@ -51,15 +51,50 @@ export class AuthService {
     });
   }
 
+  // changePassword(form: {
+  //   oldPassword: string;
+  //   newPassword: string;
+  // }): Observable<any> {
+  //   alert(`Password Changed! Success!
+  //   Email: ${form.oldPassword}
+  //   Password: ${form.newPassword}
+  //   `);
+  //   return of(form);
+  //   // return this.http.post<any>(`${this.authUrl}/change-password`, form, {headers: environment.headers})
+  // }
+
   changePassword(form: {
     oldPassword: string;
     newPassword: string;
+    confirmPassword: string;
   }): Observable<any> {
-    alert(`Password Changed! Success!
-    Email: ${form.oldPassword}
-    Password: ${form.newPassword}
-    `);
-    return of(form);
-    // return this.http.post<any>(`${this.authUrl}/change-password`, form, {headers: environment.headers})
+    if (form.newPassword === form.confirmPassword) {
+      alert(`Password Changed! Success!
+        Email: ${form.oldPassword}
+        Password: ${form.newPassword}
+        `);
+      //return of(form);
+      const payload = {
+        oldPassword: form.oldPassword,
+        newPassword: form.newPassword,
+      };
+      // return this.http.post<any>(
+      //   `${this.authUrl}/api/user/change-password`,
+      return this.http.patch<any>(
+        `${environment.baseUrl}/api/user/change-password`,
+        payload,
+        {
+          headers: environment.headers,
+          withCredentials: environment.withCredentials,
+        }
+      );
+    } else {
+      alert('The passwords do not match, please try again');
+      console.log(form.newPassword);
+      console.log(form.confirmPassword);
+      return of();
+    }
+
+    //return this.http.post<any>(`${this.authUrl}/change-password`, form, {headers: environment.headers})
   }
 }

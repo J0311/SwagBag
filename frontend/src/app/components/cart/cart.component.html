@@ -13,19 +13,31 @@
       <td>{{ product.product.id }}</td>
       <td>{{ product.product.name }}</td>
       <td>
-        <button
+        <!-- <button
           class="btn btn-success plus"
           (click)="addToCart(product.product)"
         >
           <i class="fa fa-plus"></i>
-        </button>
-        <span>{{ product.quantity }}</span>
+        </button> -->
         <button
           class="btn btn-danger minus"
           (click)="removeFromCart(product.product, product.quantity)"
         >
           <i class="fa fa-minus"></i>
         </button>
+        <span>{{ product.quantity }}</span>
+        <button
+          class="btn btn-success plus"
+          (click)="addToCart(product.product)"
+        >
+          <i class="fa fa-plus"></i>
+        </button>
+        <!-- <button
+          class="btn btn-danger minus"
+          (click)="removeFromCart(product.product, product.quantity)"
+        >
+          <i class="fa fa-minus"></i>
+        </button> -->
       </td>
       <td>{{ product.product.description }}</td>
     </tr>
