@@ -4,7 +4,6 @@ import { OrderService } from "../../services/order.service";
 import { User } from "../../models/user";
 import { Purchase } from "../../models/purchase";
 import { Product } from "src/app/models/product";
-import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { SimpleChange } from "@angular/core";
 import {HttpClientModule} from '@angular/common/http';
