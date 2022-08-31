@@ -7,6 +7,8 @@ import { Product } from "src/app/models/product";
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { SimpleChange } from "@angular/core";
+import {HttpClientModule} from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('OrderCardComponent', () => {
     
@@ -26,18 +28,17 @@ describe('OrderCardComponent', () => {
     let order: Order = {orderId: 1, user: user, purchaseTime: purchaseTime, purchases: purchaseList1};
     let order2: Order = {orderId: 2, user: user, purchaseTime: purchaseTime, purchases: purchaseList2};
 
-   // let fixture1: ComponentFixture<OrderCardComponent>, orderTotal1: OrderCardComponent, element: { querySelector: (arg0: string) => { (): any; new(): any; innerText: any; }; }, de;
+    let fixture1: ComponentFixture<OrderCardComponent>, orderTotal1: OrderCardComponent; 
        
- /*   beforeEach(() => {
+   beforeEach(() => {
         TestBed.configureTestingModule({
+          imports: [HttpClientTestingModule],
           declarations: [ OrderCardComponent ]
         });
 
         fixture1 = TestBed.createComponent(OrderCardComponent);
         orderTotal1 = fixture1.componentInstance;
-        element = fixture1.nativeElement;
-        de = fixture1.debugElement;
-  });*/
+  });
 
     beforeEach(() => {
         fixture = new OrderCardComponent(orderService);
@@ -60,14 +61,15 @@ describe('OrderCardComponent', () => {
         expect(fixture.ngOnChanges).toBeTruthy;
     });
 
- /*   it('should render `Hello World!`', () => {
-        orderTotal1.orderTotal = 100;
+    it('should render `Hello World!`', () => {
+        
+        orderTotal1.orderInfo = order;
 
-        orderTotal1.ngOnChanges({orderTotal : new SimpleChange(0,100,true)});
+        orderTotal1.ngOnChanges({orderTotal : new SimpleChange(0, 60, true)});
         
         fixture1.detectChanges();
-        expect(fixture.orderTotal).toBe(100);
-      });*/
+        expect(orderTotal1.orderTotal).toBe(60);
+      });
  
 }); 
 
