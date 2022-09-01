@@ -35,13 +35,13 @@ public class ProductRepositoryTest {
         productList.add(mug);
         productRepository.saveAll(productList);
 
-        List<Product> actual1 = productRepository.getSearchedProducts("G");
+        List<Product> actual1 = productRepository.searchByName("G");
         assertEquals(2, actual1.size()); // "Bag" and "Mug"
 
-        List<Product> actual2 = productRepository.getSearchedProducts("123");
+        List<Product> actual2 = productRepository.searchByName("123");
         assertEquals(0, actual2.size());
 
-        List<Product> actual3 = productRepository.getSearchedProducts("sh");
+        List<Product> actual3 = productRepository.searchByName("sh");
         assertEquals(1, actual3.size()); // "Shirt"
         assertEquals(shirt.getPrice(), actual3.get(0).getPrice());
     }

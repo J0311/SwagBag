@@ -24,7 +24,7 @@ import com.revature.repositories.OrderRepository;
 
 @ContextConfiguration(classes = { OrderService.class })
 @ExtendWith(SpringExtension.class)
-public class OrderServiceTests {
+public class OrderServiceTest {
 
     @Autowired
     private OrderService orderService;

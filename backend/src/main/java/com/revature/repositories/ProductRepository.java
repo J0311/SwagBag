@@ -11,6 +11,6 @@ import org.springframework.data.repository.query.Param;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT p FROM Product p WHERE UPPER(name) LIKE CONCAT('%',UPPER(:keyword),'%')")
-    public List<Product> getSearchedProducts(@Param ("keyword") String keyword );
+    public List<Product> searchByName(@Param ("keyword") String keyword );
          
 }

@@ -116,8 +116,7 @@ public class ProductController {
 
     @Authorized
     @GetMapping("/search/{keyword}")
-    public ResponseEntity<List<Product>> getSearchedProducts(@PathVariable("keyword") String kw){
-        System.out.println("key word from frontend" +kw);
-        return ResponseEntity.ok(productService.getSearchedProducts(kw));
+    public ResponseEntity<List<Product>> searchByName(@PathVariable("keyword") String kw) {
+        return ResponseEntity.ok(productService.searchByName(kw));
     }
 }
