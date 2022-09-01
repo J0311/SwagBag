@@ -71,4 +71,15 @@ export class ProductService {
       }
     );
   }
+
+  public addNewProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(
+      environment.baseUrl + this.productUrl,
+      product,
+      {
+        headers: environment.headers,
+        withCredentials: environment.withCredentials,
+      }
+    );
+  }
 }

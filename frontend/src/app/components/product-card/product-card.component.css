@@ -21,9 +21,8 @@
 
 img {
   justify-content: center;
-  height: auto;
+  height: 200px;
   width: auto;
-  max-height: 200px;
   max-width: 307px;
   object-fit: scale-down;
 }
