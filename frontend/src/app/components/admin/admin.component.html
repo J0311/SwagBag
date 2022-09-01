@@ -33,7 +33,12 @@
               >
                 View
               </button>
-              <button class="btn btn-outline-primary ml-3">Edit</button>
+              <button
+                class="btn btn-outline-primary ml-3"
+                [routerLink]="['/admin/edit-product', product.id]"
+              >
+                Edit
+              </button>
             </td>
           </tr>
         </tbody>

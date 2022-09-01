@@ -1,0 +1,69 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <form [formGroup]="editProductForm" id="product-form">
+    <div class="form-group">
+      <label for="productName">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="productDescription">Description</label>
+      <input
+        type="text"
+        class="form-control"
+        id="description"
+        formControlName="description"
+      />
+    </div>
+    <div class="form-group">
+      <label for="productImage">Image URL</label>
+      <input
+        type="text"
+        class="form-control"
+        id="image"
+        formControlName="image"
+      />
+    </div>
+    <div class="quantity-price">
+      <div class="form-group">
+        <label for="productQuantity">Quantity</label>
+        <input
+          type="number"
+          min="1"
+          class="form-control"
+          id="quantity"
+          formControlName="quantity"
+        />
+      </div>
+      <div class="form-group">
+        <label for="productPrice">Price</label>
+        <input
+          type="number"
+          min="1"
+          class="form-control"
+          id="price"
+          formControlName="price"
+        />
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary mr-2"
+      [disabled]="!editProductForm.valid"
+      (click)="onSubmit()"
+    >
+      Update Product
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      [routerLink]="'/admin'"
+    >
+      Back
+    </button>
+  </form>
+</div>

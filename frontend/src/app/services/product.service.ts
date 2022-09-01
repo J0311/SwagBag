@@ -82,4 +82,15 @@ export class ProductService {
       }
     );
   }
+
+  public updateProduct(id: number, product: Product): Observable<Product> {
+    return this.http.put<Product>(
+      environment.baseUrl + this.productUrl + '/' + id,
+      product,
+      {
+        headers: environment.headers,
+        withCredentials: environment.withCredentials,
+      }
+    );
+  }
 }

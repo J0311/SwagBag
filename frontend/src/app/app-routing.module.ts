@@ -9,6 +9,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { DisplayOrdersComponent } from './components/display-orders/display-orders.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminNewProductComponent } from './components/admin-new-product/admin-new-product.component';
+import { AdminEditProductComponent } from './components/admin-edit-product/admin-edit-product.component';
 import { AuthGuard } from './guards/auth.guard';
 import { IsSignedInGuard } from './guards/is-signed-in.guard';
 import { IsCustomerGuard } from './guards/is-customer.guard';
@@ -55,6 +56,11 @@ const routes: Routes = [
   {
     path: 'admin/new-product',
     component: AdminNewProductComponent,
+    canActivate: [AuthGuard, IsAdminGuard],
+  },
+  {
+    path: 'admin/edit-product/:id',
+    component: AdminEditProductComponent,
     canActivate: [AuthGuard, IsAdminGuard],
   },
 ];
