@@ -72,8 +72,15 @@ public class ProductController {
     }
 
     @Authorized
-    @PutMapping
-    public ResponseEntity<Product> upsert(@RequestBody Product product) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
+        Optional<Product> optional = productService.findById(id);
+
+        if (!optional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        product.setId(id);
         return ResponseEntity.ok(productService.save(product));
     }
 
