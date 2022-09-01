@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { ProductService } from '../../services/product.service';
 import { Subscription, Observable, Observer } from 'rxjs';
 import { findIndex, tap } from 'rxjs/operators';
 import {} from 'src/app/components/navbar/navbar.component';
