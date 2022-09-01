@@ -1,10 +1,13 @@
 <nav class="navbar navbar-light bg-light">
     <h4>
         <img src="../../../assets/images/favicon.png" width="8%" height="8%" alt="Revature">
-        Revature Swag Shop
+        SwagBag
     </h4>
     <form class="form-inline">
-        <input *ngIf="url==='/home'" type="text" name="search" placeholder="Search" #queryInput (input)="search(queryInput.value)">
+        <div class="search-bar">
+            <i class="fa fa-search"></i>
+            <input *ngIf="url==='/home'" type="text" placeholder="Search" #queryInput (input)="search(queryInput.value)">
+        </div>
         <button class="btn btn-light" [routerLink]="['/cart']">
             Cart
             <span class="badge badge-info">{{cartCount}}</span>
