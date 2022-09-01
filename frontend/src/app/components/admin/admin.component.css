@@ -1,12 +1,16 @@
 .container {
-  max-width: 875px;
+  max-width: 855px;
 }
 
 td:nth-child(2) {
-  max-width: 450px;
+  max-width: 300px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+td:nth-child(3) {
+  max-width: 100px;
 }
 
 @media (max-width: 850px) {
@@ -21,7 +25,7 @@ td:nth-child(2) {
     align-items: center;
   }
 
-  button:not(:nth-child(1)) {
+  button:nth-child(2) {
     margin: 0 !important;
     margin-top: 5px !important;
   }
