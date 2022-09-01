@@ -50,8 +50,9 @@ public class UserControllerTest {
                         .sessionAttr("user", user)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(content().contentType("application/json"))
-                .andExpect(content().string(containsString("newPassword123")));
+//                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+//                .andExpect(content().contentType("application/json"))
+//                .andExpect(content().string(containsString("newPassword123")));
     }
 }
