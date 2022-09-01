@@ -1,3 +1,48 @@
+nav {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    margin-right: 10px;
+}
+
+.logo h5 {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nav-links *:not(:last-child) {
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .logo h5 {
+        display: none;
+    }
+
+    .logo img {
+        width: 30px;
+    }
+
+    .nav-links {
+        display: flex;
+    }
+}
+
 .dropdown:hover .dropdown-content {
     display: flex;
 }
@@ -48,7 +93,6 @@
 }
 
 .search-bar {
-    margin: auto 0.5rem;
     position: relative;
 }
 
