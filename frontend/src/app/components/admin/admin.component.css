@@ -1,5 +1,9 @@
 .container {
-  max-width: 855px;
+  max-width: 875px;
+}
+
+td:nth-child(1) {
+  max-width: 125px;
 }
 
 td:nth-child(2) {
@@ -18,21 +22,21 @@ td:nth-child(3) {
     max-width: 95%;
   }
 
-  button {
+  tbody button {
     font-size: small;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  button:nth-child(2) {
+  tbody button:nth-child(2) {
     margin: 0 !important;
     margin-top: 5px !important;
   }
 }
 
-@media (max-width: 600px) {
-  table {
-    table-layout: fixed;
+@media (max-width: 550px) {
+  td:nth-child(2) {
+    max-width: 100px;
   }
 }

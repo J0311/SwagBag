@@ -7,4 +7,5 @@ export const environment = {
     'Access-Control-Allow-Origin':
       'http://swagbag.us-east-1.elasticbeanstalk.com',
   },
+  accessCode: 'SwagBag2022',
 };

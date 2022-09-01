@@ -2,16 +2,17 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 mt-3">
-      <h3>Hello, {{ loggedInUser.name }}!</h3>
-      <p>
-        Here you can view or edit products by clicking the appropriate action
-        button. You can also
-        <a routerLink="/admin">add a new product</a> or go
-        <a routerLink="/home">back to home</a>.
-      </p>
+      <h3>Hello, Admin!</h3>
+      <p>You can add new product, view or edit existing products here.</p>
+      <button class="btn btn-primary mr-2" [routerLink]="'/admin/new-product'">
+        New Product
+      </button>
+      <button class="btn btn-outline-danger" [routerLink]="'/home'">
+        Back
+      </button>
     </div>
   </div>
-  <div class="row">
+  <div class="row mt-2">
     <div class="col-md-12">
       <table class="table table-striped">
         <thead>
