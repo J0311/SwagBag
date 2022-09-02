@@ -1,13 +1,12 @@
-<nav class="bg-light">
-  <div class="logo" [routerLink]="['/home']">
-    <img
-      src="../../../assets/images/favicon.png"
-      width="8%"
-      height="8%"
-      alt="Revature"
-    />
-    <h5>Revature Swag Shop</h5>
-  </div>
+<nav>
+  <img
+    src="../../../assets/images/logo.svg"
+    width="75px"
+    height="75px"
+    alt="Revature"
+    class="logo"
+    [routerLink]="['/home']"
+  />
   <div class="nav-links">
     <button
       *ngIf="loggedInUser?.role !== 'ADMIN'"
