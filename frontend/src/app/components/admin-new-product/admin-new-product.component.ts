@@ -1,3 +1,4 @@
+import { S3Service } from './../../services/s3.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,9 +18,27 @@ export class AdminNewProductComponent implements OnInit {
     price: new FormControl(''),
   });
 
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(
+    private productService: ProductService,
+    private s3Service: S3Service,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const randomImageName =
+        'image-' + Math.floor(Math.random() * 1000000) + '.png';
+      const url = this.s3Service.generateUploadUrl(randomImageName);
+      this.s3Service.uploadImage(url, file).subscribe((resp) => {
+        this.addProductForm.patchValue({
+          image: url.split('?')[0],
+        });
+      });
+    }
+  }
 
   onSubmit() {
     if (

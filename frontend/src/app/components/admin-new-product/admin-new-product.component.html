@@ -22,13 +22,14 @@
       ></textarea>
     </div>
     <div class="form-group">
-      <label for="imageUrl">Image URL</label>
+      <div>
+        <label for="image">Image</label>
+      </div>
       <input
-        type="text"
-        class="form-control"
-        id="imageUrl"
-        formControlName="image"
-        placeholder="Enter image URL here"
+        type="file"
+        accept="image/*"
+        id="image"
+        (change)="onFileChange($event)"
       />
     </div>
     <div class="quantity-price">
