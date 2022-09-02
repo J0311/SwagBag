@@ -1,39 +1,117 @@
 nav {
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    padding: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
 }
 
 .logo {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .logo img {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .logo h5 {
-  margin: 0 !important;
-  padding: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-.nav-links button:not(:last-child) {
-  margin-right: 5px;
+.nav-links > *:not(:last-child) {
+    margin-right: 5px;
 }
 
 @media (max-width: 768px) {
-  .logo h5 {
-    display: none;
-  }
+    .logo h5 {
+        display: none;
+    }
+    
+    .nav-links > *:not(:last-child) {
+        margin-right: 0;
+    }
 
-  .logo img {
-    width: 30px;
-  }
+    .logo img {
+        width: 30px;
+    }
+}
 
-  .nav-links {
+.dropdown:hover .dropdown-content {
     display: flex;
-  }
+}
+
+.dropdown:hover .drop-btn {
+    color: #212529;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
+.dropdown-content {
+    display: none;
+    width: max-content;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content button {
+    width: 100%;
+    background-color: #fff;
+    border: unset;
+    padding: 0.5em 1em;
+    margin: 0;
+    outline: 0;
+}
+
+.dropdown-content button:not(:first-of-type) {
+    border-top: 1px solid #e2e6ea;
+}
+
+.dropdown-content button:hover {
+    background-color: #e2e6ea;
+    cursor: pointer;
+}
+
+#logout-button {
+    color: #dc3545;
+}
+
+#logout-button:hover, #logout-button:focus {
+    color: #fff;
+    background-color: #dc3545;
+    border-top: unset;
+}
+
+.search-bar {
+    position: relative;
+}
+
+.search-bar i {
+    position: absolute;
+    transform: translateY(50%);
+    left: 8px;
+    pointer-events: none;
+}
+
+.search-bar input {
+    padding: 4px 6px 4px 27px;
+    border: 1px solid #212529;
+    border-radius: 0.25rem;
+    outline: 0;
+    width: 100%;
+}
+
+.search-bar input:focus {
+    box-shadow: 0px 0px 2px;
 }

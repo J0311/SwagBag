@@ -22,8 +22,8 @@ import com.revature.models.User;
 @DataJpaTest(properties = {"spring.main.allow-bean-definition-overriding=true"})
 public class OrderRepositoryTest {
 
-@Autowired
-private OrderRepository orderRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Test
     void testFindAllByUserId() {
@@ -38,8 +38,8 @@ private OrderRepository orderRepository;
         orderList.add(order3);
         orderRepository.saveAll(orderList);
 
-        List<Order> expectedList = orderRepository.findAllByUserId(user.getId());
-        assertEquals(expectedList.size(), orderList.size());
-        assertEquals(expectedList.get(0).getOrderId(), orderList.get(0).getOrderId());
+        List<Order> actualList = orderRepository.findAllByUserId(user.getId());
+        assertEquals(orderList.size(), actualList.size());
+        assertEquals(orderList.get(0).getOrderId(), actualList.get(0).getOrderId());
     }
 }

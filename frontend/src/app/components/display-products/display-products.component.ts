@@ -14,11 +14,27 @@ export class DisplayProductsComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(
+    this.productService.getAllProducts().subscribe(
       (resp) => this.allProducts = resp,
       (err) => console.log(err),
       () => console.log("Products Retrieved")
     );
+  }
+
+  search(query: string): void {
+    if (query.trim() === '') {
+      this.productService.getAllProducts().subscribe(
+        (resp) => this.allProducts = resp,
+        (err) => console.log(err),
+        () => console.log("Products Retrieved")
+      );
+    } else {
+      this.productService.getProductsByQuery(query).subscribe(
+        (resp) => this.allProducts = resp,
+        (err) => console.log(err),
+        () => console.log("Products from search query retrieved")
+      );
+    }
   }
 
 }

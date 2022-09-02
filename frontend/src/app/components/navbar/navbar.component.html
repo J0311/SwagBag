@@ -1,4 +1,4 @@
-<nav class="bg-light">
+<nav class="navbar navbar-light bg-light">
   <div class="logo">
     <img
       src="../../../assets/images/favicon.png"
@@ -6,21 +6,41 @@
       height="8%"
       alt="Revature"
     />
-    <h5 [routerLink]="['/home']">Revature Swag Shop</h5>
+    <h5 [routerLink]="['/home']">SwagBag</h5>
   </div>
   <div class="nav-links">
+    <div *ngIf="url === '/home'" class="search-bar">
+      <i class="fa fa-search"></i>
+      <input
+        type="text"
+        placeholder="Search"
+        #queryInput
+        (input)="search(queryInput.value)"
+      />
+    </div>
     <button class="btn btn-light" [routerLink]="['/cart']">
       Cart
       <span class="badge badge-info">{{ cartCount }}</span>
     </button>
-    <button class="btn btn-light" [routerLink]="['/orders']">
-      Order History
-    </button>
-    <!-- <button class="btn btn-light" [routerLink]="['/change-password']">
-      Change password
-    </button> -->
-    <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()">
-      Logout
-    </button>
+    <div class="dropdown">
+      <button class="btn btn-light drop-btn">
+        <span
+          *ngIf="
+            loggedInUser && loggedInUser.name.trim().length > 0;
+            else defaultIcon
+          "
+        >
+          <i class="fa fa-user"></i> {{ loggedInUser.name }}
+        </span>
+        <ng-template #defaultIcon>
+          <i class="fa fa-bars"></i>
+        </ng-template>
+      </button>
+      <div class="dropdown-content">
+        <button [routerLink]="['/orders']">Order History</button>
+        <button [routerLink]="['/change-password']">Change password</button>
+        <button id="logout-button" (click)="logout()">Logout</button>
+      </div>
+    </div>
   </div>
 </nav>

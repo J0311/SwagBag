@@ -2,7 +2,6 @@ package com.revature.repositories;
 
 import com.revature.models.User;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ContextConfiguration(classes = {UserRepository.class})
+@ContextConfiguration(classes = { UserRepository.class })
 @EnableAutoConfiguration
-@EntityScan(basePackages = {"com.revature.models"})
-@DataJpaTest(properties = {"spring.main.allow-bean-definition-overriding=true"})
+@EntityScan(basePackages = { "com.revature.models" })
+@DataJpaTest(properties = { "spring.main.allow-bean-definition-overriding=true" })
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class UserRepositoryTest {
     @Autowired
@@ -26,7 +25,7 @@ public class UserRepositoryTest {
 
     @BeforeAll
     public void setup() {
-        user = new User(1,"test@email.com","secret","first","last");
+        user = new User(1, "test@email.com", "secret", "first", "last");
         userRepository.save(user);
     }
 
