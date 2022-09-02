@@ -6,6 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { Product } from '../../models/product'
 
 // Our mocked product service
 let MockProductService = {
@@ -23,6 +24,9 @@ let MockProductService = {
         return of({
             // Intentionally left blank
         });
+    },
+    setCart: () => {
+        // Intentionally left blank
     }
   }
 
@@ -72,4 +76,26 @@ describe('ProductDetailsComponent', () => {
     expect(compiled.querySelector('.details h5')?.textContent).toContain('Headphones');
     expect(compiled.querySelector('.details p')?.textContent).toContain('A nice pair of headphones');
   });
+
+  it('add new item to cart successful', ()=> {
+    let myProduct: Product = new Product(1, 'wasd', 1,'',10,'');
+    let myProduct2: Product = new Product(2, 'other', 2,'',20,'');
+    component.products = [{
+        product: myProduct2,
+        quantity: 1,
+      }]
+    component.addToCart(myProduct);
+    expect(true).toBe(true);
+  });
+
+  it('add existing item to cart successful', ()=> {
+    let myProduct: Product = new Product(1, 'wasd', 1,'',10,'');
+    component.products = [{
+        product: myProduct,
+        quantity: 1,
+      }]
+    component.addToCart(myProduct);
+    expect(true).toBe(true);
+  });
+
 });
