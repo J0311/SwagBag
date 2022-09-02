@@ -19,7 +19,7 @@ import com.revature.repositories.PurchaseRepository;
 
 @ContextConfiguration(classes = { PurchaseService.class })
 @ExtendWith(SpringExtension.class)
-public class PurchaseServiceTests {
+public class PurchaseServiceTest {
 
     @MockBean
     private PurchaseRepository purchaseRepository;

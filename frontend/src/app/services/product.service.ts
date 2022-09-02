@@ -41,11 +41,14 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  public getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(environment.baseUrl + this.productUrl, {
-      headers: environment.headers,
-      withCredentials: environment.withCredentials,
-    });
+  public getAllProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      environment.baseUrl + this.productUrl,
+      {
+        headers: environment.headers,
+        withCredentials: environment.withCredentials,
+      }
+    );
   }
 
   public getSingleProduct(id: number): Observable<Product> {
@@ -54,6 +57,16 @@ export class ProductService {
       {
         headers: environment.headers,
         withCredentials: environment.withCredentials,
+      }
+    );
+  }
+
+  public getProductsByQuery(query: string): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      environment.baseUrl + this.productUrl + "/search/" + query,
+      {
+        headers: environment.headers,
+        withCredentials: environment.withCredentials
       }
     );
   }

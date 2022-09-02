@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,10 +9,15 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+@Injectable()
 export class NavbarComponent implements OnInit{
 
+  private _url!: string;
+  private _loggedInUser!: Object;
   cartCount!: number;
   subscription!: Subscription;
+  
+  @Output() searchEvent = new EventEmitter<string>();
 
   constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
   
@@ -26,9 +31,21 @@ export class NavbarComponent implements OnInit{
     this.subscription.unsubscribe();
   }
 
+  get url() {
+    return this.router.url;
+  }
+
+  get loggedInUser() {
+    let user = sessionStorage.getItem('loggedInUser');
+    return user ? JSON.parse(user) : null;
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['login']);
   }
 
+  search(query: string) {
+    this.searchEvent.emit(query);
+  }
 }

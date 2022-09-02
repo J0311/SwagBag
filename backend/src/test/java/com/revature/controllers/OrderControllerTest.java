@@ -23,7 +23,7 @@ import com.revature.services.OrderService;
 
 @WebMvcTest(OrderController.class)
 @ExtendWith(SpringExtension.class)
-public class OrderControllerTests {
+public class OrderControllerTest {
 
     @Autowired
     private MockMvc mvc;

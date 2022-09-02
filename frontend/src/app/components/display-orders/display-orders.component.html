@@ -1,13 +1,20 @@
 <app-navbar></app-navbar>
-<div *ngIf="allOrders.length > 0; else elseBlock">
+<div *ngIf="allOrders.length > 0; else emptyOrders">
     <div class="orders-container">
         <app-order-card  *ngFor="let order of allOrders"
             class="orders-container-item"
             [orderInfo]="order"
-        ></app-order-card> 
+        ></app-order-card>
+        <div id="orders-footer" class="orders-container-item">
+            <button class="btn btn-outline-danger" [routerLink]="['/home']">Back</button>
+        </div>
     </div>
 </div>
 
-<ng-template #elseBlock>
-    <p class="empty-orders">No orders to display</p>
+<ng-template #emptyOrders>
+    <div class="empty-orders">
+        <p>No orders to display</p>
+        <button class="btn btn-outline-danger" [routerLink]="['/home']">Back</button>
+    </div>
 </ng-template>
+
