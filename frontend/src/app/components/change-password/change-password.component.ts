@@ -21,12 +21,16 @@ export class ChangePasswordComponent implements OnInit {
 
   onSubmit(): void {
     const formValues = this.changePasswordForm.value;
+    if (formValues.oldPassword.length == 0 || formValues.newPassword == 0 || formValues.confirmPassword == 0) {
+      this.message = 'Please fill in all fields';
+      return;
+    }
     if (formValues.newPassword.length < 6) {
       this.message = 'The password is too short';
       return;
     }
     if(formValues.newPassword !== formValues.confirmPassword){
-      this.message = 'The new password does not match';
+      this.message = 'The new password does not match confirm password';
       return;
     }
 
