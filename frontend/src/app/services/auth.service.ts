@@ -68,7 +68,6 @@ export class AuthService {
     newPassword: string;
     confirmPassword: string;
   }): Observable<any> {
-    if (form.newPassword === form.confirmPassword) {
       alert(`Password Changed! Success!
         Email: ${form.oldPassword}
         Password: ${form.newPassword}
@@ -88,12 +87,6 @@ export class AuthService {
           withCredentials: environment.withCredentials,
         }
       );
-    } else {
-      alert('The passwords do not match, please try again');
-      console.log(form.newPassword);
-      console.log(form.confirmPassword);
-      return of();
-    }
 
     //return this.http.post<any>(`${this.authUrl}/change-password`, form, {headers: environment.headers})
   }

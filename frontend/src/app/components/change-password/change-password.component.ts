@@ -14,7 +14,7 @@ export class ChangePasswordComponent implements OnInit {
     newPassword: new FormControl(''),
     confirmPassword: new FormControl(''),
   });
-
+  message: string = '';
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -22,12 +22,17 @@ export class ChangePasswordComponent implements OnInit {
   onSubmit(): void {
     const formValues = this.changePasswordForm.value;
     if (formValues.newPassword.length < 6) {
-      alert('wrong length');
+      this.message = 'The password is too short';
       return;
     }
+    if(formValues.newPassword !== formValues.oldPassword){
+      this.message = 'The new password does not match';
+      return;
+    }
+
     this.authService.changePassword(formValues).subscribe(
       (formValuesReturned) => console.log(formValuesReturned, 'Form returned'),
-      (err) => console.log(err),
+      (err) => this.message = err,
       () => this.router.navigate(['login'])
     );
   }
