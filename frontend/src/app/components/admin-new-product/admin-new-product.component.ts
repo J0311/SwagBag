@@ -18,6 +18,9 @@ export class AdminNewProductComponent implements OnInit {
     price: new FormControl(''),
   });
 
+  url: string = '';
+  file!: File;
+
   constructor(
     private productService: ProductService,
     private s3Service: S3Service,
@@ -28,14 +31,12 @@ export class AdminNewProductComponent implements OnInit {
 
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
+      this.file = event.target.files[0];
       const randomImageName =
         'image-' + Math.floor(Math.random() * 1000000) + '.png';
-      const url = this.s3Service.generateUploadUrl(randomImageName);
-      this.s3Service.uploadImage(url, file).subscribe((resp) => {
-        this.addProductForm.patchValue({
-          image: url.split('?')[0],
-        });
+      this.url = this.s3Service.generateUploadUrl(randomImageName);
+      this.addProductForm.patchValue({
+        image: this.url.split('?')[0],
       });
     }
   }
@@ -52,17 +53,19 @@ export class AdminNewProductComponent implements OnInit {
       return;
     }
 
-    const price = (
-      Math.floor(this.addProductForm.get('price')?.value * 100) / 100
-    ).toFixed(2);
-    this.addProductForm.get('price')?.setValue(price);
+    this.s3Service.uploadImage(this.url, this.file).subscribe(() => {
+      const price = (
+        Math.floor(this.addProductForm.get('price')?.value * 100) / 100
+      ).toFixed(2);
+      this.addProductForm.get('price')?.setValue(price);
 
-    this.productService.addNewProduct(this.addProductForm.value).subscribe(
-      (resp) => {
-        this.addProductForm.reset();
-        this.router.navigate(['/admin']);
-      },
-      (err) => console.log(err)
-    );
+      this.productService.addNewProduct(this.addProductForm.value).subscribe(
+        (resp) => {
+          this.addProductForm.reset();
+          this.router.navigate(['/admin']);
+        },
+        (err) => console.log(err)
+      );
+    });
   }
 }
