@@ -1,3 +1,4 @@
+import { S3Service } from './../../services/s3.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,6 +24,7 @@ export class AdminEditProductComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private s3Service: S3Service,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -43,9 +45,27 @@ export class AdminEditProductComponent implements OnInit {
             price: this.productInfo.price,
           });
         });
+
+    this.editProductForm.get('image')?.disable();
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const randomImageName =
+        'image-' + Math.floor(Math.random() * 1000000) + '.png';
+      const url = this.s3Service.generateUploadUrl(randomImageName);
+      this.s3Service.uploadImage(url, file).subscribe((resp) => {
+        this.editProductForm.patchValue({
+          image: url.split('?')[0],
+        });
+      });
+    }
   }
 
   onSubmit() {
+    this.editProductForm.get('image')?.enable();
+
     if (
       !this.editProductForm.get('name')?.value ||
       !this.editProductForm.get('description')?.value ||
