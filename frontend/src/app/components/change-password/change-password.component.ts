@@ -25,14 +25,14 @@ export class ChangePasswordComponent implements OnInit {
       this.message = 'The password is too short';
       return;
     }
-    if(formValues.newPassword !== formValues.oldPassword){
+    if(formValues.newPassword !== formValues.confirmPassword){
       this.message = 'The new password does not match';
       return;
     }
 
     this.authService.changePassword(formValues).subscribe(
       (formValuesReturned) => console.log(formValuesReturned, 'Form returned'),
-      (err) => this.message = err,
+      (err) => this.message = err.error,
       () => this.router.navigate(['login'])
     );
   }

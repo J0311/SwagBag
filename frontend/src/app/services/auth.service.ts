@@ -68,10 +68,10 @@ export class AuthService {
     newPassword: string;
     confirmPassword: string;
   }): Observable<any> {
-      alert(`Password Changed! Success!
+      /*alert(`Password Changed! Success!
         Email: ${form.oldPassword}
         Password: ${form.newPassword}
-        `);
+        `);*/
       //return of(form);
       const payload = {
         oldPassword: form.oldPassword,
