@@ -40,7 +40,7 @@ export class ProductReviewComponent implements OnInit {
           }
         },
         (err) => console.log(err),
-        () => console.log('Prodcuct Reviews Retrieved')
+        () => console.log('Product Reviews Retrieved')
       );
     });
   }

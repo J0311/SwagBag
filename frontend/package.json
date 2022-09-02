@@ -34,10 +34,10 @@
   },
   "devDependencies": {
     "@angular-builders/jest": "latest",
-    "@angular-devkit/build-angular": "~12.2.7",
+    "@angular-devkit/build-angular": "^14.2.1",
     "@angular/cli": "~12.2.7",
     "@angular/compiler-cli": "~12.2.0",
-    "@types/jest": "latest",
+    "@types/jest": "^29.0.0",
     "@types/node": "^12.11.1",
     "jest": "28.0.0",
     "typescript": "~4.3.5"
