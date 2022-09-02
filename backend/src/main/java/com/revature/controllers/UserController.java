@@ -23,11 +23,11 @@ public class UserController {
 
     @Authorized
     @PatchMapping("/change-password")
-    public ResponseEntity<User> resetPassword(@RequestBody ChangePasswordRequest changePasswordRequest,
-            HttpServletRequest request) {
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest, HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (session.getAttribute("user") == null) {
-            return ResponseEntity.badRequest().build();
+//            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("You must be logged in to perform this action");
         }
         User user = (User) session.getAttribute("user");
         String oldPassword = changePasswordRequest.getOldPassword();
@@ -35,7 +35,7 @@ public class UserController {
 
         // Check if oldPassword matches the user's current password
         if (!(userService.findByCredentials(user.getEmail(), oldPassword).isPresent())) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Your current password was not found. Please try again.");
         }
 
         // Set the User password to the new password and save

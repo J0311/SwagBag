@@ -9,3 +9,4 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: ${RDS_DB_USERNAME}
     password: ${RDS_DB_PASSWORD}
+
