@@ -19,6 +19,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
+    if (
+      this.loginForm.value.email === '' ||
+      this.loginForm.value.password === ''
+    ) {
+      alert('Please fill out all fields');
+      return;
+    }
+
     this.authService
       .login(
         this.loginForm.get('email')?.value,

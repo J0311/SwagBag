@@ -24,7 +24,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    // validate all fields
     if (
       this.registerForm.value.fname === '' ||
       this.registerForm.value.lname === '' ||
