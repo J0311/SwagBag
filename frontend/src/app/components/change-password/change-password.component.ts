@@ -21,7 +21,11 @@ export class ChangePasswordComponent implements OnInit {
 
   onSubmit(): void {
     const formValues = this.changePasswordForm.value;
-    if (formValues.oldPassword.length == 0 || formValues.newPassword == 0 || formValues.confirmPassword == 0) {
+    if (
+      formValues.oldPassword.length == 0 ||
+      formValues.newPassword == 0 ||
+      formValues.confirmPassword == 0
+    ) {
       this.message = 'Please fill in all fields';
       return;
     }
@@ -29,15 +33,18 @@ export class ChangePasswordComponent implements OnInit {
       this.message = 'The password is too short';
       return;
     }
-    if(formValues.newPassword !== formValues.confirmPassword){
+    if (formValues.newPassword !== formValues.confirmPassword) {
       this.message = 'The new password does not match confirm password';
       return;
     }
 
     this.authService.changePassword(formValues).subscribe(
-      (formValuesReturned) => console.log(formValuesReturned, 'Form returned'),
-      (err) => this.message = err.error,
-      () => this.router.navigate(['login'])
+      (resp) => console.log('Password changed successfully!'),
+      (err) => (this.message = err.error),
+      () => {
+        sessionStorage.clear();
+        this.router.navigate(['/login']);
+      }
     );
   }
 }

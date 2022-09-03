@@ -6,18 +6,23 @@
 }
 
 .card {
-  min-width: 275px;
+  min-width: 300px;
   max-width: 200px;
   height: fit-content;
   transition: 0.2s ease-out;
   margin-bottom: 20px;
 }
 
+.card-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 img {
   justify-content: center;
-  height: auto;
+  height: 200px;
   width: auto;
-  max-height: 200px;
   max-width: 307px;
   object-fit: scale-down;
 }
@@ -36,4 +41,10 @@ div {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 0;
+  }
 }

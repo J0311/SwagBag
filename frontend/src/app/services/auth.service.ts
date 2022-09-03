@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -8,9 +9,14 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   authUrl: string = `${environment.baseUrl}/auth`;
-  loggedIn: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
+
+  getLoggedInUser(): any {
+    return sessionStorage.getItem('loggedInUser')
+      ? JSON.parse(sessionStorage.getItem('loggedInUser') || '')
+      : null;
+  }
 
   login(email: string, password: string): Observable<any> {
     const payload = { email: email, password: password };
@@ -19,11 +25,12 @@ export class AuthService {
       withCredentials: environment.withCredentials,
     });
     res.subscribe((data) => {
-      this.loggedIn = true;
       sessionStorage.setItem(
         'loggedInUser',
-        JSON.stringify({ id: data.id, name: data.firstName })
+        JSON.stringify({ id: data.id, name: data.firstName, role: data.role })
       );
+
+      this.router.navigate(['/home']);
     });
 
     return res;
@@ -38,13 +45,15 @@ export class AuthService {
     firstName: string,
     lastName: string,
     email: string,
-    password: string
+    password: string,
+    role: string
   ): Observable<any> {
     const payload = {
       firstName: firstName,
       lastName: lastName,
       email: email,
       password: password,
+      role: role,
     };
     return this.http.post<any>(`${this.authUrl}/register`, payload, {
       headers: environment.headers,

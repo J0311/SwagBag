@@ -1,15 +1,14 @@
-<nav class="navbar navbar-light bg-light">
-  <div class="logo">
-    <img
-      src="../../../assets/images/favicon.png"
-      width="8%"
-      height="8%"
-      alt="Revature"
-    />
-    <h5 [routerLink]="['/home']">SwagBag</h5>
-  </div>
+<nav>
+  <img
+    src="../../../assets/images/logo.svg"
+    width="75px"
+    height="75px"
+    alt="Revature"
+    class="logo"
+    [routerLink]="['/home']"
+  />
   <div class="nav-links">
-    <div *ngIf="url === '/home'" class="search-bar">
+    <div *ngIf="url === '/home'" class="search-bar ml-2">
       <i class="fa fa-search"></i>
       <input
         type="text"
@@ -18,12 +17,23 @@
         (input)="search(queryInput.value)"
       />
     </div>
-    <button class="btn btn-light" [routerLink]="['/cart']">
+    <button
+      *ngIf="loggedInUser?.role !== 'ADMIN'"
+      class="btn btn-light"
+      [routerLink]="['/cart']"
+    >
       Cart
       <span class="badge badge-info">{{ cartCount }}</span>
     </button>
+    <button
+      *ngIf="loggedInUser?.role === 'ADMIN'"
+      class="btn btn-outline-primary my-2 my-sm-0 ml-2"
+      [routerLink]="['/admin']"
+    >
+      Admin
+    </button>
     <div class="dropdown">
-      <button class="btn btn-light drop-btn">
+      <button class="btn btn-outline-primary drop-btn">
         <span
           *ngIf="
             loggedInUser && loggedInUser.name.trim().length > 0;
@@ -37,7 +47,12 @@
         </ng-template>
       </button>
       <div class="dropdown-content">
-        <button [routerLink]="['/orders']">Order History</button>
+        <button
+          *ngIf="loggedInUser?.role !== 'ADMIN'"
+          [routerLink]="['/orders']"
+        >
+          Order History
+        </button>
         <button [routerLink]="['/change-password']">Change password</button>
         <button id="logout-button" (click)="logout()">Logout</button>
       </div>

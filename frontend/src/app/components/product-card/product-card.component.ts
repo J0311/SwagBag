@@ -15,6 +15,7 @@ export class ProductCardComponent implements OnInit {
     product: Product;
     quantity: number;
   }[] = [];
+  loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
 
   subscription!: Subscription;
   totalPrice: number = 0;

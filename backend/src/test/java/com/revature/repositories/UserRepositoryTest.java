@@ -25,7 +25,7 @@ public class UserRepositoryTest {
 
     @BeforeAll
     public void setup() {
-        user = new User(1, "test@email.com", "secret", "first", "last");
+        user = new User(1, "test@email.com", "secret", "first", "last", "CUSTOMER");
         userRepository.save(user);
     }
 

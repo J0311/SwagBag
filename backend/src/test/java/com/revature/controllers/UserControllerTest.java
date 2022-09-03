@@ -23,7 +23,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.anyString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-
 @WebMvcTest(UserController.class)
 @ExtendWith(SpringExtension.class)
 public class UserControllerTest {
@@ -36,7 +35,7 @@ public class UserControllerTest {
 
     @Test
     public void testChangePassword() throws Exception {
-        User user = new User(1,"test@email.com","secret","first","last");
+        User user = new User(1, "test@email.com", "secret", "first", "last", "CUSTOMER");
         String oldPassword = "secret";
         String newPassword = "newPassword123";
         ChangePasswordRequest changePasswordRequest = new ChangePasswordRequest(oldPassword, newPassword);
@@ -51,7 +50,7 @@ public class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.status().isNoContent());
+                // .andExpect(MockMvcResultMatchers.status().isNoContent());
                 .andExpect(content().contentType("application/json"))
                 .andExpect(content().string(containsString("newPassword123")));
     }

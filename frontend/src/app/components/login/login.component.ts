@@ -6,33 +6,32 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   loginForm = new FormGroup({
     email: new FormControl(''),
-    password: new FormControl('')
-  })
-  
+    password: new FormControl(''),
+  });
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
-  
+  ngOnInit(): void {}
+
   onSubmit(): void {
-    this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe(
-      () => {
-        this.authService.loggedIn=true;
-      },
-      (err) => console.log(err),
-      () => this.router.navigate(['home'])
-    );
+    this.authService
+      .login(
+        this.loginForm.get('email')?.value,
+        this.loginForm.get('password')?.value
+      )
+      .subscribe(
+        () => {},
+        (err) => console.log(err),
+        () => this.router.navigate(['home'])
+      );
   }
 
   register(): void {
     this.router.navigate(['register']);
   }
-
 }

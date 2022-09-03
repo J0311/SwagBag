@@ -39,7 +39,11 @@
       <button class="btn btn-outline-danger" [routerLink]="['/home']">
         Back
       </button>
-      <button class="btn btn-success" (click)="addToCart(productInfo)">
+      <button
+        *ngIf="loggedInUser?.role === 'CUSTOMER'"
+        class="btn btn-success"
+        (click)="addToCart(productInfo)"
+      >
         Add to Cart
       </button>
     </div>

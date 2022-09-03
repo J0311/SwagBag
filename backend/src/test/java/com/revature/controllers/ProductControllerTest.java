@@ -65,13 +65,14 @@ public class ProductControllerTest {
         Mockito.when(productService.findById(expected.getId())).thenReturn(Optional.of(expected));
         String expectedContent = jacksonObjectMapper.writeValueAsString(expected);
 
-        // Perform the request and verify the the response contains the expected status and content
+        // Perform the request and verify the the response contains the expected status
+        // and content
         mvc.perform(
                 MockMvcRequestBuilders
-                    .delete("/api/product/{id}", expected.getId()))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-            .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+                        .delete("/api/product/{id}", expected.getId()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
 
         // Verify the following functions were called on the mock
         InOrder inOrder = Mockito.inOrder(productService);
@@ -83,12 +84,13 @@ public class ProductControllerTest {
     void testDeleteProductFails() throws Exception {
         int testId = 3;
         Mockito.when(productService.findById(testId)).thenReturn(Optional.empty());
-        
-        // Perform the request and verify the the response contains the expected status and content
+
+        // Perform the request and verify the the response contains the expected status
+        // and content
         mvc.perform(
                 MockMvcRequestBuilders
-                    .delete("/api/product/{id}", testId))
-            .andExpect(MockMvcResultMatchers.status().isNotFound());
+                        .delete("/api/product/{id}", testId))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
 
         // Verify the following functions were called on the mock
         Mockito.verify(productService).findById(testId);
@@ -99,13 +101,13 @@ public class ProductControllerTest {
         Mockito.when(productService.findAll()).thenReturn(productList);
         String expectedContent = jacksonObjectMapper.writeValueAsString(productList);
 
-        // Perform the request and verify the the response contains the expected status and content
+        // Perform the request and verify the the response contains the expected status
+        // and content
         mvc.perform(
-                MockMvcRequestBuilders.get("/api/product")
-            )
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-            .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+                MockMvcRequestBuilders.get("/api/product"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
 
         // Verify the following functions were called on the mock
         Mockito.verify(productService).findAll();
@@ -117,24 +119,26 @@ public class ProductControllerTest {
         Mockito.when(productService.findById(expected.getId())).thenReturn(Optional.of(expected));
         String expectedContent = jacksonObjectMapper.writeValueAsString(expected);
 
-        // Perform the request and verify the response contains the expected status and content
+        // Perform the request and verify the response contains the expected status and
+        // content
         mvc.perform(
                 MockMvcRequestBuilders
-                    .get("/api/product/{id}", expected.getId()))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-            .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+                        .get("/api/product/{id}", expected.getId()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
 
     @Test
     void testGetProductByIdFails() throws Exception {
         Mockito.when(productService.findById(Mockito.anyInt())).thenReturn(Optional.empty());
-        
-        // Perform the request and verify the response contains the expected status and content        
+
+        // Perform the request and verify the response contains the expected status and
+        // content
         mvc.perform(
                 MockMvcRequestBuilders
-                    .get("/api/product/3"))
-            .andExpect(MockMvcResultMatchers.status().isNotFound());
+                        .get("/api/product/3"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @Test
@@ -145,20 +149,22 @@ public class ProductControllerTest {
         p1.setQuantity(availableQuantity);
         List<ProductInfo> cart = Collections.singletonList(new ProductInfo(p1.getId(), purchaseQuantity));
         Mockito.when(productService.findById(p1.getId())).thenReturn(Optional.of(p1));
-        Product expected = new Product(p1.getId(), expectedQuantity, p1.getPrice(), p1.getDescription(), p1.getImage(), p1.getName());
+        Product expected = new Product(p1.getId(), expectedQuantity, p1.getPrice(), p1.getDescription(), p1.getImage(),
+                p1.getName());
         List<Product> expectedChanges = Collections.singletonList(expected);
         String expectedString = jacksonObjectMapper.writeValueAsString(expectedChanges);
 
-        // Perform the request and verify the response contains the expected status and content        
+        // Perform the request and verify the response contains the expected status and
+        // content
         mvc.perform(
                 MockMvcRequestBuilders
-                    .patch("/api/product")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(jacksonObjectMapper.writeValueAsString(cart))
-                    .sessionAttr("user", new User()))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-            .andExpect(MockMvcResultMatchers.content().string(expectedString));
+                        .patch("/api/product")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jacksonObjectMapper.writeValueAsString(cart))
+                        .sessionAttr("user", new User()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.content().string(expectedString));
 
         // Verify the following functions were called on the mock
         Mockito.verify(productService).saveAll(Mockito.any(), Mockito.any());
@@ -174,14 +180,15 @@ public class ProductControllerTest {
         List<ProductInfo> cart = Collections.singletonList(new ProductInfo(p1.getId(), purchaseQuantity));
         Mockito.when(productService.findById(p1.getId())).thenReturn(Optional.of(p1));
 
-        // Perform the request and verify the response contains the expected status and content        
+        // Perform the request and verify the response contains the expected status and
+        // content
         mvc.perform(
                 MockMvcRequestBuilders
-                    .patch("/api/product")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(jacksonObjectMapper.writeValueAsString(cart))
-                    .sessionAttr("user", new User()))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                        .patch("/api/product")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jacksonObjectMapper.writeValueAsString(cart))
+                        .sessionAttr("user", new User()))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
         // Verify the following functions were NOT called on the mock
         Mockito.verify(productService, Mockito.never()).saveAll(Mockito.any(), Mockito.any());
@@ -197,14 +204,15 @@ public class ProductControllerTest {
         List<ProductInfo> cart = Collections.singletonList(new ProductInfo(p1.getId(), purchaseQuantity));
         Mockito.when(productService.findById(p1.getId())).thenReturn(Optional.empty());
 
-        // Perform the request and verify the response contains the expected status and content        
+        // Perform the request and verify the response contains the expected status and
+        // content
         mvc.perform(
                 MockMvcRequestBuilders
-                    .patch("/api/product")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(jacksonObjectMapper.writeValueAsString(cart))
-                    .sessionAttr("user", new User()))
-            .andExpect(MockMvcResultMatchers.status().isNotFound());
+                        .patch("/api/product")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jacksonObjectMapper.writeValueAsString(cart))
+                        .sessionAttr("user", new User()))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
 
         // Verify the following functions were NOT called on the mock
         Mockito.verify(productService, Mockito.never()).saveAll(Mockito.any(), Mockito.any());
@@ -216,34 +224,37 @@ public class ProductControllerTest {
     void testSearchByName() throws Exception {
         String query = "Q";
         List<Product> expected = new ArrayList<>();
-        expected.add(p2);   // bag
-        expected.add(p3);   // mug
+        expected.add(p2); // bag
+        expected.add(p3); // mug
         Mockito.when(productService.searchByName(query)).thenReturn(expected);
         String expectedContent = jacksonObjectMapper.writeValueAsString(expected);
 
-        // Perform the request and verify the response contains the expected status and content
+        // Perform the request and verify the response contains the expected status and
+        // content
         mvc.perform(
                 MockMvcRequestBuilders
-                    .get("/api/product/search/{id}", query))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-            .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+                        .get("/api/product/search/{id}", query))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
 
     @Test
-    void testUpsert() throws Exception {
-        Product expected = p1;
-        Mockito.when(productService.save(expected)).thenReturn(expected);
+    void updateProduct() throws Exception {
+        Product expected = new Product(1, 10, 10.0F, "description", "image", "new name");
+        Mockito.when(productService.findById(expected.getId())).thenReturn(Optional.of(expected));
+        Mockito.when(productService.save(Mockito.any())).thenReturn(expected);
         String expectedContent = jacksonObjectMapper.writeValueAsString(expected);
 
-        // Perform the request and verify the response contains the expected status and content        
+        // Perform the request and verify the response contains the expected status and
+        // content
         mvc.perform(
-            MockMvcRequestBuilders
-                .put("/api/product")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(expectedContent))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-            .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+                MockMvcRequestBuilders
+                        .put("/api/product/{id}", expected.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jacksonObjectMapper.writeValueAsString(expected)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
 }

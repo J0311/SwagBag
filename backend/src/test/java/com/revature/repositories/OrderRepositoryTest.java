@@ -16,10 +16,10 @@ import org.springframework.test.context.ContextConfiguration;
 import com.revature.models.Order;
 import com.revature.models.User;
 
-@ContextConfiguration(classes = {OrderRepository.class})
+@ContextConfiguration(classes = { OrderRepository.class })
 @EnableAutoConfiguration
-@EntityScan(basePackages = {"com.revature.models"})
-@DataJpaTest(properties = {"spring.main.allow-bean-definition-overriding=true"})
+@EntityScan(basePackages = { "com.revature.models" })
+@DataJpaTest(properties = { "spring.main.allow-bean-definition-overriding=true" })
 public class OrderRepositoryTest {
 
     @Autowired
@@ -28,10 +28,10 @@ public class OrderRepositoryTest {
     @Test
     void testFindAllByUserId() {
 
-        User user = new User(1,"test@email.com","secret","first","last");
-        Order order1 = new Order(1,user, LocalDateTime.now(),null );
-        Order order2 = new Order(2,user, LocalDateTime.now(),null );
-        Order order3 = new Order(3,user, LocalDateTime.now(),null );
+        User user = new User(1, "test@email.com", "secret", "first", "last", "CUSTOMER");
+        Order order1 = new Order(1, user, LocalDateTime.now(), null);
+        Order order2 = new Order(2, user, LocalDateTime.now(), null);
+        Order order3 = new Order(3, user, LocalDateTime.now(), null);
         List<Order> orderList = new ArrayList<>();
         orderList.add(order1);
         orderList.add(order2);
