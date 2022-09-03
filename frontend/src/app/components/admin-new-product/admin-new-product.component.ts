@@ -57,14 +57,14 @@ export class AdminNewProductComponent implements OnInit {
       const price = (
         Math.floor(this.addProductForm.get('price')?.value * 100) / 100
       ).toFixed(2);
-      this.addProductForm.get('price')?.setValue(price);
+      this.addProductForm.get('price')?.setValue(parseFloat(price));
 
       this.productService.addNewProduct(this.addProductForm.value).subscribe(
-        (resp) => {
+        () => {
           this.addProductForm.reset();
           this.router.navigate(['/admin']);
         },
-        (err) => console.log(err)
+        (err: any) => console.log(err)
       );
     });
   }
