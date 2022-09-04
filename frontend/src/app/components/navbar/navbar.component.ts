@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -24,7 +25,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private theme: ThemeService
   ) {}
 
   ngOnInit(): void {
@@ -53,5 +55,13 @@ export class NavbarComponent implements OnInit {
 
   search(query: string) {
     this.searchEvent.emit(query);
+  }
+
+  public switchTheme(): void {
+    if (this.theme.current === 'light') {
+        this.theme.current = 'dark';
+    } else {
+        this.theme.current = 'light';
+    }
   }
 }

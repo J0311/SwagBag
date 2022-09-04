@@ -8,18 +8,19 @@
     [routerLink]="['/home']"
   />
   <div class="nav-links">
-    <div *ngIf="url === '/home'" class="search-bar ml-2">
+    <div *ngIf="url === '/home'" class="search-bar ml-2 mr-1">
       <i class="fa fa-search"></i>
       <input
         type="text"
         placeholder="Search"
+        style="background-color: inherit; color: inherit"
         #queryInput
         (input)="search(queryInput.value)"
       />
     </div>
     <button
       *ngIf="loggedInUser?.role !== 'ADMIN'"
-      class="btn btn-light"
+      class="btn btn-outline-info my-2 my-sm-0 mr-1"
       [routerLink]="['/cart']"
     >
       Cart
@@ -47,13 +48,14 @@
         </ng-template>
       </button>
       <div class="dropdown-content">
+        <button (click)="switchTheme()">Switch Theme</button>
         <button
           *ngIf="loggedInUser?.role !== 'ADMIN'"
           [routerLink]="['/orders']"
         >
           Order History
         </button>
-        <button [routerLink]="['/change-password']">Change password</button>
+        <button [routerLink]="['/change-password']">Change Password</button>
         <button id="logout-button" (click)="logout()">Logout</button>
       </div>
     </div>

@@ -20,7 +20,9 @@
 }
 
 .details {
-  background-color: #e9ecef;
+  color: #ffffffda;
+  background-color: #0f0f0f;
+  mix-blend-mode: difference;
   display: flex;
   flex-direction: row;
   gap: 1em;
