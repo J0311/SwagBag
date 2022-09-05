@@ -7,9 +7,13 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
-import { ProductService } from 'src/app/services/product.service';
-import { ThemeService } from 'src/app/services/theme.service';
+//import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '../../services/auth.service';
+//import { ProductService } from 'src/app/services/product.service';
+import { ProductService } from '../../services/product.service';
+//import { ThemeService } from 'src/app/services/theme.service';
+import { ThemeService } from '../../services/theme.service';
+
 
 @Component({
   selector: 'app-navbar',
