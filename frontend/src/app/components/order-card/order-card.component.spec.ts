@@ -1,76 +1,75 @@
-import { OrderCardComponent } from "./order-card.component";
-import { Order } from "../../models/order";
-import { OrderService } from "../../services/order.service";
-import { User } from "../../models/user";
-import { Purchase } from "../../models/purchase";
-import { Product } from "src/app/models/product";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { SimpleChange } from "@angular/core";
-import {HttpClientModule} from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { Product } from "../../models/product";
+import { User } from "../../models/user";
+import { Order } from "../../models/order";
+import { Purchase } from "../../models/purchase";
+import { OrderService } from "../../services/order.service";
+import { OrderCardComponent } from "./order-card.component";
 
 describe('OrderCardComponent', () => {
-    
-    let fixture: OrderCardComponent;
-    let orderService: OrderService;
 
-    let product1: Product = {id: 1, name:"phone", quantity:1,price:50, description: "null", image: "null"};
-    let product2: Product = {id: 2, name:"laptop", quantity:2,price:10, description: "null", image: "null"};
-    
-    let user!: User;
-    let purchaseTime!: Date;
-    let tempOrder!: Order;
-    let purchase1: Purchase = {purchaseId :1, order: tempOrder, product: product1,quantity:1, pricePerItem:50};
-    let purchase2: Purchase = {purchaseId :2, order: tempOrder, product: product2,quantity:1, pricePerItem:10};
-    let purchaseList1: Purchase[] = [purchase1, purchase2];
-    let purchaseList2: Purchase[] = [purchase1];
-    let order: Order = {orderId: 1, user: user, purchaseTime: purchaseTime, purchases: purchaseList1};
-    let order2: Order = {orderId: 2, user: user, purchaseTime: purchaseTime, purchases: purchaseList2};
+    let fixture: ComponentFixture<OrderCardComponent>;
+    let comp: OrderCardComponent;
 
-    let fixture1: ComponentFixture<OrderCardComponent>, orderTotal1: OrderCardComponent; 
-       
-   beforeEach(() => {
-        TestBed.configureTestingModule({
-          imports: [HttpClientTestingModule],
-          declarations: [ OrderCardComponent ]
-        });
-
-        fixture1 = TestBed.createComponent(OrderCardComponent);
-        orderTotal1 = fixture1.componentInstance;
-  });
+    let user: User;
+    let products: Product[];
+    let purchases: Purchase[];
+    let order: Order;
 
     beforeEach(() => {
-        fixture = new OrderCardComponent(orderService);
-        fixture.orderInfo = order;
+        user = new User(0, "", "", "", "");
+        order = new Order(0, user, new Date(), purchases);
+        products = [
+            new Product(0, "", 20, "", 10, ""),
+            new Product(1, "", 20, "", 3.50, "")
+        ];
+        purchases = [
+            new Purchase(0, order, products[0], 2, products[0].price),
+            new Purchase(1, order, products[1], 7, products[1].price)
+        ];
+        order.purchases = purchases;
+        TestBed.configureTestingModule({
+            declarations: [OrderCardComponent],
+            providers: [ {provide: OrderService, useValue: {}} ],
+        });
+        fixture = TestBed.createComponent(OrderCardComponent);
+        comp = fixture.componentInstance;
+        comp.orderInfo = order;
     });
 
-
-    it('should have order 0', () => {
-        expect(fixture.orderTotal).toEqual(0);
-    });
-
-    it('check orderInfo render', () => {
-        expect(fixture.orderInfo).toBeTruthy();
-        expect(fixture.orderInfo.orderId).toEqual(1);
-    });
-
-    it('should return order total', () => {
-        expect(fixture.ngOnChanges).toBeUndefined; 
-        fixture.orderInfo = order2;
-        expect(fixture.ngOnChanges).toBeTruthy;
-    });
-
-    it('should return order total', () => {
+    it('Should be initialized with the correct orderTotal', () => {
+        // Act 
+        comp.ngOnChanges({});
+        comp.ngOnInit();
         
-        orderTotal1.orderInfo = order;
+        // Assert
+        let expectedTotal = purchases
+            .map(purchase => purchase.pricePerItem * purchase.quantity)
+            .reduce((prev, next) => prev + next);
+        expect(comp.orderTotal).toBe(expectedTotal);
+    });
 
-        orderTotal1.ngOnChanges({orderTotal : new SimpleChange(0, 60, true)});
-        
-        fixture1.detectChanges();
-        expect(orderTotal1.orderTotal).toBe(60);
-      });
- 
-}); 
+    it('Should update orderTotal on input change', () => {
+        // Arrange
+        let newOrder = new Order(1, user, new Date(), purchases);
+        let newPurchases = [
+            new Purchase(2, newOrder, products[0], 3, 87.45),
+            new Purchase(3, newOrder, products[1], 1, 12.94)
+        ];
+        newOrder.purchases = newPurchases;
+        let expectedTotal = newPurchases
+            .map(purchase => purchase.pricePerItem * purchase.quantity)
+            .reduce((prev, next) => prev + next);
 
+        // Act
+        comp.ngOnChanges({});
+        comp.ngOnInit();
+        comp.orderInfo = newOrder;
+        comp.ngOnChanges({orderInfo: new SimpleChange(order, newOrder, true)});
+        fixture.detectChanges();
 
-
+        // Assert
+        expect(comp.orderTotal).toEqual(expectedTotal);
+    });
+});
