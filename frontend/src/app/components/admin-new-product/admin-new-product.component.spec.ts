@@ -136,8 +136,6 @@ describe('AdminNewProductComponent', () => {
       });
 
       it('should call addNewProduct and test logic after successful return', () => {
-        let addNewProductCalled = false;
-
         jest.spyOn(s3ServiceMock, 'uploadImage').mockReturnValue({
           subscribe: jest.fn((callback) => {
             jest.spyOn(productServiceMock, 'addNewProduct').mockReturnValue({

@@ -1,9 +1,9 @@
-import { S3Service } from './../../services/s3.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { Product } from '../../models/product';
+import { S3Service } from '../../services/s3.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-admin-edit-product',
@@ -35,21 +35,22 @@ export class AdminEditProductComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.productId = params['id'];
-    }),
-      this.productService
-        .getSingleProduct(this.productId)
-        .subscribe((product) => {
-          this.productInfo = product;
-          this.editProductForm.patchValue({
-            name: this.productInfo.name,
-            description: this.productInfo.description,
-            image: this.productInfo.image,
-            quantity: this.productInfo.quantity,
-            price: this.productInfo.price,
-          });
-        });
+    });
 
-    this.editProductForm.get('image')?.disable();
+    this.productService
+      .getSingleProduct(this.productId)
+      .subscribe((product) => {
+        this.productInfo = product;
+        this.editProductForm.patchValue({
+          name: this.productInfo.name,
+          description: this.productInfo.description,
+          image: this.productInfo.image,
+          quantity: this.productInfo.quantity,
+          price: this.productInfo.price,
+        });
+      });
+
+    this.editProductForm.get('image')!.disable();
   }
 
   onFileChange(event: any) {
@@ -65,14 +66,14 @@ export class AdminEditProductComponent implements OnInit {
   }
 
   onSubmit() {
-    this.editProductForm.get('image')?.enable();
+    this.editProductForm.get('image')!.enable();
 
     if (
-      !this.editProductForm.get('name')?.value ||
-      !this.editProductForm.get('description')?.value ||
-      !this.editProductForm.get('image')?.value ||
-      !this.editProductForm.get('quantity')?.value ||
-      !this.editProductForm.get('price')?.value
+      !this.editProductForm.get('name')!.value ||
+      !this.editProductForm.get('description')!.value ||
+      !this.editProductForm.get('image')!.value ||
+      !this.editProductForm.get('quantity')!.value ||
+      !this.editProductForm.get('price')!.value
     ) {
       alert('Please fill out all fields');
       return;
@@ -84,6 +85,7 @@ export class AdminEditProductComponent implements OnInit {
           .updateProduct(this.productId, this.editProductForm.value)
           .subscribe((product) => {
             this.productInfo = product;
+            this.router.navigate(['/admin']);
           });
       });
     } else {
@@ -91,9 +93,8 @@ export class AdminEditProductComponent implements OnInit {
         .updateProduct(this.productId, this.editProductForm.value)
         .subscribe((product) => {
           this.productInfo = product;
+          this.router.navigate(['/admin']);
         });
     }
-
-    this.router.navigate(['/admin']);
   }
 }
