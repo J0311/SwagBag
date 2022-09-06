@@ -11,7 +11,7 @@ import { ProductReviewService } from './../../services/product-review.service';
   styleUrls: ['./product-review.component.css'],
 })
 export class ProductReviewComponent implements OnInit {
-  loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
+  loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
   moment = moment;
 
   productId: number = 0;
@@ -40,7 +40,7 @@ export class ProductReviewComponent implements OnInit {
           }
         },
         (err) => console.log(err),
-        () => console.log('Prodcuct Reviews Retrieved')
+        () => console.log('Product Reviews Retrieved')
       );
     });
   }
@@ -53,9 +53,9 @@ export class ProductReviewComponent implements OnInit {
 
   onSubmit() {
     if (
-      !this.reviewForm.get('rating')?.value ||
-      !this.reviewForm.get('title')?.value ||
-      !this.reviewForm.get('review')?.value
+      !this.reviewForm.get('rating')!.value ||
+      !this.reviewForm.get('title')!.value ||
+      !this.reviewForm.get('review')!.value
     ) {
       alert('Please fill out all fields');
       return;
@@ -66,9 +66,9 @@ export class ProductReviewComponent implements OnInit {
         this.productId,
         this.loggedInUser.id,
         this.loggedInUser.name,
-        this.reviewForm.get('rating')?.value,
-        this.reviewForm.get('title')?.value,
-        this.reviewForm.get('review')?.value
+        this.reviewForm.get('rating')!.value,
+        this.reviewForm.get('title')!.value,
+        this.reviewForm.get('review')!.value
       )
       .subscribe(
         (res) => {

@@ -7,7 +7,7 @@ import { ThemeService } from './services/theme.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'E-Commerce Client';
+  title = 'SwagBag';
 
-  constructor (private theme: ThemeService) {}
+  constructor(private theme: ThemeService) {}
 }
