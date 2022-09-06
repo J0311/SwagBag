@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from 'src/app/models/order';
-import { OrderService } from 'src/app/services/order.service';
+import { Order } from '../../models/order';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-orders',
@@ -13,13 +13,14 @@ export class DisplayOrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderService.getOrders().subscribe(
-      // change with actual user id
       (resp) => {
         this.allOrders = resp;
-        console.log(this.allOrders);
+        console.log('Orders Retrieved');
       },
-      (err) => console.log(err),
-      () => console.log('Orders Retrieved')
+      (err) => {
+        this.allOrders = [];
+        console.log(err);
+      }
     );
   }
 }

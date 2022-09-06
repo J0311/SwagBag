@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Order } from 'src/app/models/order';
-import { OrderService } from 'src/app/services/order.service';
+import { Order } from '../../models/order';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-order-card',
@@ -8,10 +8,10 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./order-card.component.css']
 })
 export class OrderCardComponent implements OnInit, OnChanges {
-
+   
   @Input() orderInfo!: Order;
   orderTotal: number = 0;
-
+    
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
