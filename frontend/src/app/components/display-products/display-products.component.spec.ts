@@ -25,13 +25,15 @@ describe('DisplayProductsComponent', () => {
         });
     
         it('should fetch all products on init', () => {
-            jest.spyOn(productServiceMock, 'getAllProducts').mockReturnValue(of(products));
+            jest.spyOn(productServiceMock, 'getAllProducts')
+                .mockReturnValue(of(products));
             comp.ngOnInit();
             expect(comp.allProducts.length).toBe(products.length);
         });
     
         it('should have an empty product array on init failure', () => {
-            jest.spyOn(productServiceMock, 'getAllProducts').mockReturnValue(throwError('error'));
+            jest.spyOn(productServiceMock, 'getAllProducts')
+                .mockReturnValue(throwError('error'));
             const consoleSpy = jest.spyOn(console, 'log');
             comp.ngOnInit();
             expect(comp.allProducts.length).toBe(0);
@@ -60,7 +62,6 @@ describe('DisplayProductsComponent', () => {
                 .mockReturnValue(throwError('error'));
             const initialProducts = comp.allProducts;
             const consoleSpy = jest.spyOn(console, 'log');
-
             comp.search('');
             expect(comp.allProducts).toEqual(initialProducts);
             expect(consoleSpy).toHaveBeenCalledWith('error');
@@ -71,7 +72,6 @@ describe('DisplayProductsComponent', () => {
                 .mockReturnValue(throwError('error'));
             const initialProducts = comp.allProducts;
             const consoleSpy = jest.spyOn(console, 'log');
-            
             comp.search('Bag');
             expect(comp.allProducts).toEqual(initialProducts);
             expect(consoleSpy).toHaveBeenCalledWith('error');
