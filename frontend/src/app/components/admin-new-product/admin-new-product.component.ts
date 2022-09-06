@@ -2,7 +2,7 @@ import { S3Service } from './../../services/s3.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProductService } from 'src/app/services/product.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-admin-new-product',
@@ -43,11 +43,11 @@ export class AdminNewProductComponent implements OnInit {
 
   onSubmit() {
     if (
-      !this.addProductForm.get('name')?.value ||
-      !this.addProductForm.get('description')?.value ||
-      !this.addProductForm.get('image')?.value ||
-      !this.addProductForm.get('quantity')?.value ||
-      !this.addProductForm.get('price')?.value
+      !this.addProductForm.get('name')!.value ||
+      !this.addProductForm.get('description')!.value ||
+      !this.addProductForm.get('image')!.value ||
+      !this.addProductForm.get('quantity')!.value ||
+      !this.addProductForm.get('price')!.value
     ) {
       alert('Please fill out all fields');
       return;
@@ -55,9 +55,9 @@ export class AdminNewProductComponent implements OnInit {
 
     this.s3Service.uploadImage(this.url, this.file).subscribe(() => {
       const price = (
-        Math.floor(this.addProductForm.get('price')?.value * 100) / 100
+        Math.floor(this.addProductForm.get('price')!.value * 100) / 100
       ).toFixed(2);
-      this.addProductForm.get('price')?.setValue(parseFloat(price));
+      this.addProductForm.get('price')!.setValue(parseFloat(price));
 
       this.productService.addNewProduct(this.addProductForm.value).subscribe(
         () => {

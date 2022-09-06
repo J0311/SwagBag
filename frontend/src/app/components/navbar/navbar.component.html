@@ -8,7 +8,7 @@
     [routerLink]="['/home']"
   />
   <div class="nav-links">
-    <div *ngIf="url === '/home'" class="search-bar ml-2 mr-1">
+    <div *ngIf="url === '/home'" class="search-bar ml-2 mr-2">
       <i class="fa fa-search"></i>
       <input
         type="text"
@@ -20,7 +20,7 @@
     </div>
     <button
       *ngIf="loggedInUser?.role !== 'ADMIN'"
-      class="btn btn-outline-info my-2 my-sm-0 mr-1"
+      class="btn btn-outline-info my-2 my-sm-0 mr-2"
       [routerLink]="['/cart']"
     >
       Cart
@@ -28,7 +28,7 @@
     </button>
     <button
       *ngIf="loggedInUser?.role === 'ADMIN'"
-      class="btn btn-outline-primary my-2 my-sm-0 ml-2"
+      class="btn btn-outline-primary my-2 my-sm-0 mr-2"
       [routerLink]="['/admin']"
     >
       Admin

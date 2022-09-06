@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { Product } from '../../models/product';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-admin',
@@ -8,7 +8,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
+  loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
   allProducts: Product[] = [];
 
   constructor(private productService: ProductService) {}
