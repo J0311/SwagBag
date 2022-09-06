@@ -15,13 +15,12 @@ export class DisplayOrdersComponent implements OnInit {
     this.orderService.getOrders().subscribe(
       (resp) => {
         this.allOrders = resp;
-        console.log(this.allOrders);
+        console.log('Orders Retrieved');
       },
       (err) => {
         this.allOrders = [];
         console.log(err);
-      },
-      () => console.log('Orders Retrieved')
+      }
     );
   }
 }
