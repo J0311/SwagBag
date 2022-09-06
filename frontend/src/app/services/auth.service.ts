@@ -59,44 +59,4 @@ export class AuthService {
       headers: environment.headers,
     });
   }
-
-  // changePassword(form: {
-  //   oldPassword: string;
-  //   newPassword: string;
-  // }): Observable<any> {
-  //   alert(`Password Changed! Success!
-  //   Email: ${form.oldPassword}
-  //   Password: ${form.newPassword}
-  //   `);
-  //   return of(form);
-  //   // return this.http.post<any>(`${this.authUrl}/change-password`, form, {headers: environment.headers})
-  // }
-
-  changePassword(form: {
-    oldPassword: string;
-    newPassword: string;
-    confirmPassword: string;
-  }): Observable<any> {
-      /*alert(`Password Changed! Success!
-        Email: ${form.oldPassword}
-        Password: ${form.newPassword}
-        `);*/
-      //return of(form);
-      const payload = {
-        oldPassword: form.oldPassword,
-        newPassword: form.newPassword,
-      };
-      // return this.http.post<any>(
-      //   `${this.authUrl}/api/user/change-password`,
-      return this.http.patch<any>(
-        `${environment.baseUrl}/api/user/change-password`,
-        payload,
-        {
-          headers: environment.headers,
-          withCredentials: environment.withCredentials,
-        }
-      );
-
-    //return this.http.post<any>(`${this.authUrl}/change-password`, form, {headers: environment.headers})
-  }
 }

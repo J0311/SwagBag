@@ -7,9 +7,9 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
-import { ProductService } from 'src/app/services/product.service';
-import { ThemeService } from 'src/app/services/theme.service';
+import { AuthService } from '../../services/auth.service';
+import { ProductService } from '../../services/product.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -59,9 +59,9 @@ export class NavbarComponent implements OnInit {
 
   public switchTheme(): void {
     if (this.theme.current === 'light') {
-        this.theme.current = 'dark';
+      this.theme.current = 'dark';
     } else {
-        this.theme.current = 'light';
+      this.theme.current = 'light';
     }
   }
 }
