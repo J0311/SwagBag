@@ -1,0 +1,86 @@
+<div class="container">
+  <form
+    *ngIf="loggedInUser?.role !== 'ADMIN'"
+    id="review-form"
+    [formGroup]="reviewForm"
+  >
+    <div class="rating-title">
+      <div class="form-group">
+        <label for="inputRating">Product Rating</label>
+        <select class="form-control" formControlName="rating" id="inputRating">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="inputTitle">Review Title</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="title"
+          id="inputTitle"
+          placeholder="Enter Review Title"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputReview">Review</label>
+      <textarea
+        class="form-control"
+        formControlName="review"
+        id="inputReview"
+        placeholder="What you think of this product?"
+        rows="3"
+      ></textarea>
+    </div>
+    <button
+      [disabled]="!reviewForm.valid"
+      class="btn btn-primary"
+      (click)="onSubmit()"
+    >
+      Submit
+    </button>
+  </form>
+
+  <div style="margin: 1rem 0.5rem">
+    <div class="review-data" *ngIf="allProductReviews.length > 0; else message">
+      <h4>All Reviews</h4>
+      <h4>
+        Total Reviews: <i>{{ allProductReviews.length }}</i> | Average Rating:
+        <i>{{ averageRating | number: "1.1-1" }}</i>
+      </h4>
+    </div>
+
+    <ng-template #message>
+      <h4 class="text-center mt-3">No Reviews Available</h4>
+    </ng-template>
+    <div class="row" *ngFor="let review of allProductReviews">
+      <div class="col-md-12">
+        <div class="review-container">
+          <div class="review-heading">
+            <div class="review-heading-button">
+              <h5>{{ review.rating }}⭐️ | {{ review.title }}</h5>
+              <button
+                *ngIf="review.reviewerId === loggedInUser.id"
+                class="btn btn-danger"
+                (click)="onDelete(review.id)"
+              >
+                Delete <i class="fa fa-trash"></i>
+              </button>
+            </div>
+            <div>
+              <p>Reviewer: {{ review.reviewerName }}</p>
+              <p>{{ moment(review.timestamp).format("llll") }}</p>
+            </div>
+          </div>
+          <p>
+            <i>{{ review.review }}</i>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

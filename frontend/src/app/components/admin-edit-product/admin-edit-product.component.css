@@ -1,0 +1,36 @@
+.container {
+  width: 95%;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#product-form {
+  padding-top: 5%;
+  width: 45%;
+}
+
+.quantity-price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.quantity-price div {
+  width: 49%;
+}
+
+@media (max-width: 768px) {
+  #product-form {
+    width: 100%;
+  }
+
+  .quantity-price {
+    flex-direction: column;
+  }
+
+  .quantity-price div {
+    width: 100%;
+  }
+}

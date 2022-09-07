@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-3">
+      <h3>Hello, Admin!</h3>
+      <p>You can add new product, view or edit existing products here.</p>
+      <button class="btn btn-primary mr-2" [routerLink]="'/admin/new-product'">
+        New Product
+      </button>
+      <button class="btn btn-outline-danger" [routerLink]="'/home'">
+        Back
+      </button>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of allProducts">
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>
+              <button
+                class="btn btn-outline-info"
+                [routerLink]="['/product', product.id]"
+              >
+                View
+              </button>
+              <button
+                class="btn btn-outline-primary ml-3 edit"
+                [routerLink]="['/admin/edit-product', product.id]"
+              >
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

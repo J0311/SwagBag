@@ -3,7 +3,7 @@ INSERT INTO product (id, quantity, price, description, image, name) VALUES (
     10,
     20.00,
     'A nice pair of headphones',
-    'https://i.insider.com/54eb437f6bb3f7697f85da71?width=1000&format=jpeg&auto=webp',
+    'https://res-4.cloudinary.com/grover/image/upload/v1634740745/sojw9nnrug7qqz2mmact.png',
     'Headphones'
 ),
 (
@@ -39,10 +39,19 @@ INSERT INTO product (id, quantity, price, description, image, name) VALUES (
     'Coat'
 );
 
-INSERT INTO users (id, email, password, first_name, last_name) VALUES (
+INSERT INTO users (id, email, password, first_name, last_name, role) VALUES (
     1,
-    'testuser@gmail.com',
+    'customer@swagbag.com',
     'password',
     'Test',
-    'User'
+    'Customer',
+    'CUSTOMER'
+), 
+(
+    2,
+    'admin@swagbag.com',
+    'password',
+    'Test',
+    'Admin',
+    'ADMIN'
 );

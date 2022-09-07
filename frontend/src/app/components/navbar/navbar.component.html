@@ -1,13 +1,63 @@
-<nav class="navbar navbar-light bg-light">
-    <h4>
-        <img src="../../../assets/images/favicon.png" width="8%" height="8%" alt="Revature">
-        Revature Swag Shop
-    </h4>
-    <form class="form-inline">
-        <button class="btn btn-light" [routerLink]="['/cart']">
-            Cart
-            <span class="badge badge-info">{{cartCount}}</span>
+<nav>
+  <img
+    src="../../../assets/images/logo.svg"
+    width="75px"
+    height="75px"
+    alt="Revature"
+    class="logo"
+    [routerLink]="['/home']"
+  />
+  <div class="nav-links">
+    <div *ngIf="url === '/home'" class="search-bar ml-2 mr-2">
+      <i class="fa fa-search"></i>
+      <input
+        type="text"
+        placeholder="Search"
+        style="background-color: inherit; color: inherit"
+        #queryInput
+        (input)="search(queryInput.value)"
+      />
+    </div>
+    <button
+      *ngIf="loggedInUser?.role !== 'ADMIN'"
+      class="btn btn-outline-info my-2 my-sm-0 mr-2"
+      [routerLink]="['/cart']"
+    >
+      Cart
+      <span class="badge badge-info">{{ cartCount }}</span>
+    </button>
+    <button
+      *ngIf="loggedInUser?.role === 'ADMIN'"
+      class="btn btn-outline-primary my-2 my-sm-0 mr-2"
+      [routerLink]="['/admin']"
+    >
+      Admin
+    </button>
+    <div class="dropdown">
+      <button class="btn btn-outline-primary drop-btn">
+        <span
+          *ngIf="
+            loggedInUser && loggedInUser.name.trim().length > 0;
+            else defaultIcon
+          "
+        >
+          <i class="fa fa-user"></i> {{ loggedInUser.name }}
+        </span>
+        <ng-template #defaultIcon>
+          <i class="fa fa-bars"></i>
+        </ng-template>
+      </button>
+      <div class="dropdown-content">
+        <button (click)="switchTheme()">Switch Theme</button>
+        <button
+          *ngIf="loggedInUser?.role !== 'ADMIN'"
+          [routerLink]="['/orders']"
+        >
+          Order History
         </button>
-        <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout();">Logout</button>
-    </form>
+        <button [routerLink]="['/change-password']">Change Password</button>
+        <button id="logout-button" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
 </nav>

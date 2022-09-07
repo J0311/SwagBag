@@ -1,15 +1,12 @@
-server:
-  port: 8080
 spring:
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    database-platform: org.hibernate.dialect.H2Dialect
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     defer-datasource-initialization: true
   datasource:
-    url: jdbc:h2:mem:memdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: password
-  h2:
-    console.enabled: true
+    url: ${RDS_DB_URL}
+    driver-class-name: org.postgresql.Driver
+    username: ${RDS_DB_USERNAME}
+    password: ${RDS_DB_PASSWORD}
+
