@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { Product } from '../../models/product';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,17 +14,13 @@ export class CartComponent implements OnInit {
     quantity: number;
   }[] = [];
 
-  totalPrice!: number;
-  cartProducts: Product[] = [];
+  totalPrice: number = 0;
 
   constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.productService.getCart().subscribe((cart) => {
       this.products = cart.products;
-      this.products.forEach((element) =>
-        this.cartProducts.push(element.product)
-      );
       this.totalPrice = cart.totalPrice;
     });
   }
@@ -43,7 +39,7 @@ export class CartComponent implements OnInit {
    * The first parameter is the passedProduct which is defined in models/product.ts
    * The second parameter is the quantity of this particular product inside the cart
    */
-  removeFromCart(passedProduct: Product, quantity: number): void {
+  removeFromCart(passedProduct: Product): void {
     const productToDecrement = this.products.find(
       (product) => product.product.id === passedProduct.id
     );
@@ -61,8 +57,7 @@ export class CartComponent implements OnInit {
     else cart.cartCount = 0;
 
     cart.products = this.products;
-    cart.totalPrice =
-      cart.totalPrice - <any>productToDecrement?.product.price ?? 0;
+    cart.totalPrice = cart.totalPrice - <any>productToDecrement!.product.price;
     this.productService.setCart(cart);
   }
 
@@ -80,7 +75,7 @@ export class CartComponent implements OnInit {
       productToIncrement.quantity++;
       cart.cartCount++;
       cart.totalPrice =
-        cart.totalPrice + <any>productToIncrement?.product.price ?? 0;
+        cart.totalPrice + <any>productToIncrement!.product.price;
     }
 
     cart.products = this.products;
