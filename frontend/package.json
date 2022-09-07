@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "config": "ts-node ./src/assets/scripts/config.ts",
-    "start": "npm run config -- --env=dev && ng serve",
+    "start": "npm run config -- --env=dev && ng serve -o",
     "build": "npm run config -- --env=prod && ng build --output-path ../backend/src/main/resources/static",
     "watch": "ng build --watch --configuration development",
     "test": "jest",

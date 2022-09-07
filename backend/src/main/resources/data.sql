@@ -41,7 +41,7 @@ INSERT INTO product (id, quantity, price, description, image, name) VALUES (
 
 INSERT INTO users (id, email, password, first_name, last_name, role) VALUES (
     1,
-    'testuser@gmail.com',
+    'customer@swagbag.com',
     'password',
     'Test',
     'Customer',
