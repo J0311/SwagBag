@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
-
   public static default = 'light';
   public static themes = new Map<string, string>([
-    ['light', 'https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css'],
-    ['dark', 'https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@1.0.0/dist/css/bootstrap-dark.min.css']
+    [
+      'light',
+      'https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css',
+    ],
+    [
+      'dark',
+      'https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@1.0.0/dist/css/bootstrap-dark.min.css',
+    ],
   ]);
 
   public get current(): string {
@@ -16,11 +21,13 @@ export class ThemeService {
   }
 
   public set current(value: string) {
-    localStorage.setItem('theme', value);
-    let theme = ThemeService.themes.get(value);
-    if (theme == null) return;
-
-    this.style.href = theme;
+    if (ThemeService.themes.has(value)) {
+      localStorage.setItem('theme', value);
+      let theme = ThemeService.themes.get(value);
+      this.style.href = theme!;
+    } else {
+      localStorage.setItem('theme', ThemeService.default);
+    }
   }
 
   private readonly style: HTMLLinkElement;
@@ -31,8 +38,6 @@ export class ThemeService {
     document.head.appendChild(this.style);
 
     let theme = ThemeService.themes.get(this.current);
-    if (theme == null) return;
-    
-    this.style.href = theme;
+    this.style.href = theme!;
   }
 }
