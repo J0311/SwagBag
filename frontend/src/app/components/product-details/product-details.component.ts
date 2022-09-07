@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { ProductService } from '../../services/product.service';
 import { Subscription, Observable, Observer } from 'rxjs';
 import { findIndex, tap } from 'rxjs/operators';
 import {} from 'src/app/components/navbar/navbar.component';
@@ -14,6 +14,7 @@ import {} from 'src/app/components/navbar/navbar.component';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
+  loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
   productId: number = 0;
   productInfo!: Product;
   loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
@@ -33,10 +34,7 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     //gets product id from homepage when view button is clicked
-    this.productId = parseInt(
-      this.router.snapshot.paramMap.get('id') || '',
-      10
-    );
+    this.productId = parseInt(this.router.snapshot.paramMap.get('id')!, 10);
 
     //sets this instance of product info equal to the product id
     this.productService.getSingleProduct(this.productId).subscribe((data) => {
