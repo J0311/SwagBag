@@ -14,6 +14,7 @@ import {} from 'src/app/components/navbar/navbar.component';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
+  loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
   productId: number = 0;
   productInfo!: Product;
 
@@ -32,10 +33,7 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     //gets product id from homepage when view button is clicked
-    this.productId = parseInt(
-      this.router.snapshot.paramMap.get('id') || '',
-      10
-    );
+    this.productId = parseInt(this.router.snapshot.paramMap.get('id')!, 10);
 
     //sets this instance of product info equal to the product id
     this.productService.getSingleProduct(this.productId).subscribe((data) => {

@@ -1,101 +1,136 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProductService } from '../../services/product.service';
-
 import { ProductDetailsComponent } from './product-details.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { Product } from '../../models/product'
-
-// Our mocked product service
-let MockProductService = {
-    getSingleProduct: (id: number) => {
-        return of({
-            description: "A nice pair of headphones",
-            id: 1,
-            image: "https://i.insider.com/54eb437f6bb3f7697f85da71?width=1000&format=jpeg&auto=webp",
-            name: "Headphones",
-            price: 20,
-            quantity: 10
-        });
-    },
-    getCart: () => {
-        return of({
-            // Intentionally left blank
-        });
-    },
-    setCart: () => {
-        // Intentionally left blank
-    }
-  }
+import { Product } from '../../models/product';
 
 describe('ProductDetailsComponent', () => {
-  let component: ProductDetailsComponent;
-  let fixture: ComponentFixture<ProductDetailsComponent>;
+  let fixture: ProductDetailsComponent;
+  let mockProduct = {
+    id: 1,
+    name: 'Headphones',
+    quantity: 10,
+    price: 20,
+    description: 'A nice pair of headphones',
+    image: 'test',
+  };
+  let mockProductService: any = {
+    getSingleProduct: (id: number) => {
+      return of(mockProduct);
+    },
 
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      declarations: [ ProductDetailsComponent ],
-      imports: [ HttpClientTestingModule, RouterTestingModule ],
-      providers: [
+    setCart: (cart: any) => {
+      return of(cart);
+    },
+
+    getCart: () => {
+      return of({
+        cartCount: 0,
+        products: [],
+        totalPrice: 0,
+      });
+    },
+  };
+  let activatedRoute: ActivatedRoute = {
+    snapshot: {
+      url: [],
+      paramMap: {
+        get: (id: string) => {
+          return '1';
+        },
+      },
+    },
+  } as any;
+
+  beforeEach(() => {
+    fixture = new ProductDetailsComponent(mockProductService, activatedRoute);
+    fixture.productId = 1;
+    fixture.productInfo = mockProduct;
+  });
+
+  describe('Setup component', () => {
+    it('should create', () => {
+      expect(fixture).toBeTruthy();
+    });
+
+    it('component holds the correct product id', () => {
+      expect(fixture.productId).toEqual(1);
+    });
+
+    it('component contains correct productInfo name', () => {
+      expect(fixture.productInfo.name).toEqual('Headphones');
+    });
+  });
+
+  describe('ngOnInit', () => {
+    beforeEach(() => {
+      fixture.productId = 1;
+      jest
+        .spyOn(mockProductService, 'getSingleProduct')
+        .mockReturnValue(of(mockProduct));
+      jest.spyOn(mockProductService, 'getCart').mockReturnValue(
+        of({
+          cartCount: 0,
+          products: [],
+          totalPrice: 0,
+        })
+      );
+    });
+
+    it('should set productId to 1', () => {
+      fixture.ngOnInit();
+      expect(fixture.productId).toEqual(1);
+    });
+
+    it('should set productInfo to the correct product', () => {
+      fixture.ngOnInit();
+      expect(fixture.productInfo).toEqual(mockProduct);
+    });
+
+    it('should set cartCount to 0', () => {
+      fixture.ngOnInit();
+      expect(fixture.cartCount).toEqual(0);
+    });
+
+    it('should set products to an empty array', () => {
+      fixture.ngOnInit();
+      expect(fixture.products).toEqual([]);
+    });
+
+    it('should set totalPrice to 0', () => {
+      fixture.ngOnInit();
+      expect(fixture.totalPrice).toEqual(0);
+    });
+  });
+
+  describe('addToCart', () => {
+    it('add new item to cart successful', () => {
+      let myProduct: Product = new Product(1, 'wasd', 1, '', 10, '');
+      let myProduct2: Product = new Product(2, 'other', 2, '', 20, '');
+      fixture.products = [
         {
-            provide: ActivatedRoute,
-            useValue: {
-              snapshot: {
-                paramMap: { get: (key: string) => { return 1; } },
-              },
-            },
-          },
-          {
-            provide: ProductService, useValue: MockProductService
-          },
-      ]
-    })
-    .compileComponents();
+          product: myProduct2,
+          quantity: 1,
+        },
+      ];
 
-    fixture = TestBed.createComponent(ProductDetailsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+      fixture.addToCart(myProduct);
+      expect(true).toBe(true);
+    });
+
+    it('add existing item to cart successful', () => {
+      let myProduct: Product = new Product(1, 'wasd', 1, '', 10, '');
+      fixture.products = [
+        {
+          product: myProduct,
+          quantity: 1,
+        },
+      ];
+
+      fixture.addToCart(myProduct);
+      expect(true).toBe(true);
+    });
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('component holds the correct product id', () => {
-    expect(component.productId).toEqual(1);
-  });
-
-  it('component contains correct productInfo name', () => {
-    expect(component.productInfo.name).toEqual("Headphones");
-  });
-
-  it('html correctly rendered product information', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.details h5')?.textContent).toContain('Headphones');
-    expect(compiled.querySelector('.details p')?.textContent).toContain('A nice pair of headphones');
-  });
-
-  it('add new item to cart successful', ()=> {
-    let myProduct: Product = new Product(1, 'wasd', 1,'',10,'');
-    let myProduct2: Product = new Product(2, 'other', 2,'',20,'');
-    component.products = [{
-        product: myProduct2,
-        quantity: 1,
-      }]
-    component.addToCart(myProduct);
-    expect(true).toBe(true);
-  });
-
-  it('add existing item to cart successful', ()=> {
-    let myProduct: Product = new Product(1, 'wasd', 1,'',10,'');
-    component.products = [{
-        product: myProduct,
-        quantity: 1,
-      }]
-    component.addToCart(myProduct);
-    expect(true).toBe(true);
-  });
-
 });
+function createSpyObj(arg0: string, arg1: string[]) {
+  throw new Error('Function not implemented.');
+}
