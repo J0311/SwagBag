@@ -1,5 +1,9 @@
 <div class="container">
-  <form id="review-form" [formGroup]="reviewForm">
+  <form
+    *ngIf="loggedInUser?.role !== 'ADMIN'"
+    id="review-form"
+    [formGroup]="reviewForm"
+  >
     <div class="rating-title">
       <div class="form-group">
         <label for="inputRating">Product Rating</label>

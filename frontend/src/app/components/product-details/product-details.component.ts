@@ -17,7 +17,6 @@ export class ProductDetailsComponent implements OnInit {
   loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
   productId: number = 0;
   productInfo!: Product;
-  loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser') || '');
 
   cartCount!: number;
   products: {
