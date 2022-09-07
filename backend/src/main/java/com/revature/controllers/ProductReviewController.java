@@ -33,21 +33,39 @@ public class ProductReviewController {
         this.productReviewService = productReviewService;
     }
 
+    /**
+     * Returns a list of all product reviews for a given product.
+     *
+     * @param productId - the id of the product to get reviews for
+     * @return ResponseEntity<List<ProductReview>> with status code 200 if
+     *         successful
+     */
     @Authorized
     @GetMapping(path = "/{productId}", produces = "application/json")
     public ResponseEntity<List<ProductReview>> getProductReviews(@PathVariable int productId) {
         return new ResponseEntity<>(productReviewService.getProductReviews(productId), HttpStatus.OK);
     }
 
+    /**
+     * Returns the product review with the given id.
+     *
+     * @param id - the id of the product review to get
+     * @return ResponseEntity<ProductReview> with status code 200 if successful
+     */
     @Authorized
     @GetMapping("/{id}")
     public ResponseEntity<ProductReview> getById(@PathVariable("id") int id) {
         Optional<ProductReview> optional = productReviewService.findById(id);
 
         return optional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-
     }
 
+    /**
+     * Stores a new product review in the database.
+     *
+     * @param productReviewRequest - the product review to add
+     * @return ResponseEntity<ProductReview> with status code 201 if successful
+     */
     @Authorized
     @PostMapping
     public ResponseEntity<ProductReview> save(@RequestBody ProductReviewRequest productReviewRequest) {
@@ -62,6 +80,13 @@ public class ProductReviewController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productReviewService.save(productReview));
     }
 
+    /**
+     * Updates the product review with the given id.
+     *
+     * @param id            - the id of the product review to update
+     * @param productReview - the product review to update
+     * @return ResponseEntity<ProductReview> with status code 200 if successful
+     */
     @Authorized
     @PutMapping("/{id}")
     public ResponseEntity<ProductReview> update(@PathVariable("id") int id, @RequestBody ProductReview productReview) {
@@ -75,6 +100,12 @@ public class ProductReviewController {
         return ResponseEntity.ok(productReviewService.save(productReview));
     }
 
+    /**
+     * Deletes the product review with the given id.
+     *
+     * @param id - the id of the product review to delete
+     * @return ResponseEntity with status code 200 if successful
+     */
     @Authorized
     @DeleteMapping("/{id}")
     public ResponseEntity<ProductReview> delete(@PathVariable("id") int id) {

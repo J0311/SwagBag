@@ -11,6 +11,11 @@ export class ChangePasswordService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   *
+   * @param form is from the change password component html, and is a form of 3 strings
+   * @returns http response gathered from the userService.java
+   */
   changePassword(form: {
     oldPassword: string;
     newPassword: string;

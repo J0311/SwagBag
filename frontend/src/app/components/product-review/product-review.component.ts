@@ -45,12 +45,21 @@ export class ProductReviewComponent implements OnInit {
     });
   }
 
+  /**
+   * Calculates average rating from the rating field of each Product Review
+   */
   calculateAverageRating() {
     this.averageRating =
       this.allProductReviews.reduce((acc, curr) => acc + curr.rating, 0) /
       this.allProductReviews.length;
   }
 
+  /**
+   * First checks if any field in the form is empty and alerts if there is at least one empty field
+   * Then uses the fields to add a product review to the database,
+   * Then recalculates the average rating
+   * Finally, resets the form
+   */
   onSubmit() {
     if (
       !this.reviewForm.get('rating')!.value ||
@@ -80,6 +89,11 @@ export class ProductReviewComponent implements OnInit {
       );
   }
 
+  /**
+   * Uses the passed in product review id to delete that review from the database
+   * Then recalculates the average rating
+   * @param id 
+   */
   onDelete(id: number) {
     this.productReviewService.deleteProductReview(id).subscribe((res) => {
       this.allProductReviews = this.allProductReviews.filter(

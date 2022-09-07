@@ -29,6 +29,11 @@ export class AdminNewProductComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * When a file is added, which is a required field,
+   * generate a URL for the image and assign it to the image field of the form
+   * @param event 
+   */
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
@@ -41,6 +46,11 @@ export class AdminNewProductComponent implements OnInit {
     }
   }
 
+  /**
+   * Alerts if a field on the form is left blank,
+   * Otherwise, upload the image to s3 bucket and
+   * Save product to the database
+   */
   onSubmit() {
     if (
       !this.addProductForm.get('name')!.value ||

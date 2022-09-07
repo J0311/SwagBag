@@ -40,6 +40,7 @@ export class ProductDetailsComponent implements OnInit {
       this.productInfo = data;
     });
 
+    //to be notified of changes in cart on product details page
     this.subscription = this.productService.getCart().subscribe((cart) => {
       this.cartCount = cart.cartCount;
       this.products = cart.products;
@@ -47,6 +48,8 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
+  //copied from product-card.component.ts
+  //add item to cart from product details page
   addToCart(product: Product): void {
     let inCart = false;
 

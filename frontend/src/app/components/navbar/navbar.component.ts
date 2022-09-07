@@ -39,10 +39,16 @@ export class NavbarComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
+  /**
+   * Gets the current router url
+   */
   get url() {
     return this.router.url;
   }
 
+  /**
+   * Gets the currently logged in user from session storage or null if none
+   */
   get loggedInUser() {
     let user = sessionStorage.getItem('loggedInUser');
     return user ? JSON.parse(user) : null;
@@ -53,6 +59,12 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
+  /**
+   * Emits a new event called 'searchEvent' as an Angular @Output
+   * containing the search query
+   * 
+   * @param query The entered query in the search input
+   */
   search(query: string) {
     this.searchEvent.emit(query);
   }

@@ -21,6 +21,12 @@ export class S3Service {
     signatureVersion: 'v4',
   });
 
+  /**
+   * Generates an URL to be used to upload to the S3 bucket.
+   * Expires in 60 minutes from generation
+   * @param randomImageName 
+   * @returns 
+   */
   generateUploadUrl(randomImageName: string) {
     return this.s3.getSignedUrl('putObject', {
       Bucket: this.bucketName,
@@ -29,6 +35,12 @@ export class S3Service {
     });
   }
 
+  /**
+   * Sends a put request to upload the file to the S3 Bucket
+   * @param url 
+   * @param image 
+   * @returns 
+   */
   uploadImage(url: string, image: File) {
     return this.http.put(url, image, {
       headers: { 'Content-Type': image.type },

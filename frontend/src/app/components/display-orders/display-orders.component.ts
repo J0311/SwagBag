@@ -11,6 +11,9 @@ export class DisplayOrdersComponent implements OnInit {
   allOrders: Order[] = [];
   constructor(private orderService: OrderService) {}
 
+  /**
+   * On init, fetch all orders belonging to the current logged in user
+   */
   ngOnInit(): void {
     this.orderService.getOrders().subscribe(
       (resp) => {

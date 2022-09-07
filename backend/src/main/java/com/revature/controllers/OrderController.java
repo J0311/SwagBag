@@ -24,6 +24,13 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    /**
+     * Returns a list of all orders in the database.
+     * 
+     * @param req - the request object that will be used to get the user's
+     *            information from the session
+     * @return ResponseEntity<List<Order>> with status code 200 if successful
+     */
     @Authorized
     @GetMapping("/history")
     public ResponseEntity<List<Order>> getOrderHistory(HttpServletRequest req) {

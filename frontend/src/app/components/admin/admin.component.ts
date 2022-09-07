@@ -13,6 +13,9 @@ export class AdminComponent implements OnInit {
 
   constructor(private productService: ProductService) {}
 
+  /**
+   * Retrieves an array of all products from the database on initialization
+   */
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe(
       (resp) => (this.allProducts = resp),

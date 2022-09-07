@@ -12,6 +12,12 @@ export class ProductReviewService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Retrieve all product reviews from the database
+   * for the product with the passed in productId
+   * @param productId 
+   * @returns 
+   */
   public getProductReviews(productId: number): Observable<ProductReview[]> {
     return this.http.get<ProductReview[]>(
       environment.baseUrl + this.productReviewUrl + '/' + productId,
@@ -22,6 +28,16 @@ export class ProductReviewService {
     );
   }
 
+  /**
+   * Use params to send a request to add a new product to the database
+   * @param productId 
+   * @param reviewerId 
+   * @param reviewerName 
+   * @param rating 
+   * @param title 
+   * @param review 
+   * @returns 
+   */
   public addProductReview(
     productId: number,
     reviewerId: number,
@@ -48,6 +64,12 @@ export class ProductReviewService {
     );
   }
 
+  /**
+   * Sends a delete request to delete product review
+   * with the passed in id
+   * @param id 
+   * @returns 
+   */
   public deleteProductReview(id: number): Observable<any> {
     return this.http.delete<any>(
       environment.baseUrl + this.productReviewUrl + '/' + id,

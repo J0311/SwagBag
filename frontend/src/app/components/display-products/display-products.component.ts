@@ -21,6 +21,13 @@ export class DisplayProductsComponent implements OnInit {
     );
   }
 
+  /**
+   * If the search query is empty, gets all products and saves to allProducts;
+   * otherwise gets all products containing the search query in the product name
+   * and saves to allProducts
+   * 
+   * @param query The query to search
+   */
   search(query: string): void {
     if (query.trim() === '') {
       this.productService.getAllProducts().subscribe(

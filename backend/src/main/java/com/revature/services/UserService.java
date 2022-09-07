@@ -15,20 +15,36 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Returns the user with the given username and password if it exists in the
+     * database.
+     *
+     * @param email    - the email of the user to retrieve
+     * @param password - the password of the user to retrieve
+     * @return an optional containing the user with the given email and password if
+     *         it exists, otherwise an empty optional
+     */
     public Optional<User> findByCredentials(String email, String password) {
         return userRepository.findByEmailAndPassword(email, password);
     }
 
+    /**
+     * Saves the given user to the database.
+     *
+     * @param user - the user to save
+     * @return the saved user
+     */
     public User save(User user) {
         return userRepository.save(user);
     }
 
     /**
-     * to find user by id
-     * @param userId
-     * @return
+     * Returns the user with the given id if it exists in the database.
+     *
+     * @param userId - the id of the user to retrieve
+     * @return an optional containing the user with the given id if it exists
      */
-    public Optional<User> findById(int userId){
+    public Optional<User> findById(int userId) {
         return userRepository.findById(userId);
     }
 }

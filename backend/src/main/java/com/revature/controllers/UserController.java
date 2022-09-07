@@ -21,12 +21,20 @@ public class UserController {
         this.userService = userService;
     }
 
+    /**
+     * Changes the password of the user.
+     *
+     * @param changePasswordRequest - the change password request object
+     * @param request               - the request object that will be used to get
+     *                              the user's information from the session
+     * @return ResponseEntity<User> with status code 200 if successful
+     */
     @Authorized
     @PatchMapping("/change-password")
-    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest, HttpServletRequest request) {
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest,
+            HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (session.getAttribute("user") == null) {
-//            return ResponseEntity.badRequest().build();
             return ResponseEntity.badRequest().body("You must be logged in to perform this action");
         }
         User user = (User) session.getAttribute("user");

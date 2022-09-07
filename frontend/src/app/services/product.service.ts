@@ -61,6 +61,12 @@ export class ProductService {
     );
   }
 
+  /**
+   * Get all products that contain the search query in the product name
+   * 
+   * @param query The string query to search
+   * @returns An Observable containing an array of matching products
+   */
   public getProductsByQuery(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
       environment.baseUrl + this.productUrl + "/search/" + query,

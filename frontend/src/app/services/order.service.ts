@@ -12,6 +12,11 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Get the orders belonging to the current logged in user
+   * 
+   * @returns An Observable containing an array of orders
+   */
   public getOrders(): Observable<Order[]> {
     let path = environment.baseUrl + this.productUrl;
     console.log('Creating an HTTPRequest with path: ' + path);

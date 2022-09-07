@@ -17,8 +17,13 @@ export class OrderCardComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
+  /**
+   * When a change to an @Input is detected, update orderTotal
+   * with the sum of all purchases in the order
+   * 
+   * @param changes A list of changed @Inputs
+   */
   ngOnChanges(changes: SimpleChanges): void {
-      // Calculate the order total
       this.orderTotal = this.orderInfo.purchases
         .map(purchase => purchase.pricePerItem * purchase.quantity)
         .reduce((prev, next) => prev + next);

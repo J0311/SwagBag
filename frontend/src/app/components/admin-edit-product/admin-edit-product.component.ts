@@ -32,6 +32,13 @@ export class AdminEditProductComponent implements OnInit {
     private router: Router
   ) {}
 
+  /**
+   * Retrives the product id from the URL
+   * Then populates the form with the current product info
+   * If image file is changed, upload new image to s3 bucket
+   * On submit, alerts if any of the fields are left blank
+   * Otherwise, update the product in the database with the changed information / image.
+   */
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.productId = params['id'];

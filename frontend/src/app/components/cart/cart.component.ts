@@ -37,7 +37,6 @@ export class CartComponent implements OnInit {
 
   /** This removeFromCart() method takes in 2 parameters from the cart.html document.
    * The first parameter is the passedProduct which is defined in models/product.ts
-   * The second parameter is the quantity of this particular product inside the cart
    */
   removeFromCart(passedProduct: Product): void {
     const productToDecrement = this.products.find(
@@ -61,6 +60,9 @@ export class CartComponent implements OnInit {
     this.productService.setCart(cart);
   }
 
+  /** This addToCart() method takes in 2 parameters from the cart.html document.
+   * The first parameter is the passedProduct which is defined in models/product.ts
+   */
   addToCart(passedProduct: Product) {
     const productToIncrement = this.products.find(
       (product) => product.product.id === passedProduct.id
