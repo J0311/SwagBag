@@ -47,4 +47,4 @@ SwagBag is an e-commerce application offering a wide selection of Revature swag 
 
 Please check out the [STARTUP](STARTUP.md) for detailed instructions on how to run the application.
 
-Thank you from the SwagBag team!
+Thank you for using SwagBag - The SwagBag Team :)

@@ -8,8 +8,11 @@ Once you have completed the prerequisites, you can run the application by follow
 ## Backend
 
 3.  From terminal, navigate to the `backend` directory
-4.  Run `mvn spring-boot:run -Dspring-boot.run.profiles=dev`
-5.  The backend will be running on port 8080
+4.  Run `mvn spring-boot:run -Dspring-boot.run.profiles=dev`, if maven is NOT installed on your machine, you will need to set the environment variable (active profile) to `SPRING_PROFILES_ACTIVE=dev` manually before running the application. To do this in IntelliJ:
+    1. Go to `Run > Edit Configurations > Environment Variables` and add the variable there.
+    2. Then run the application by clicking the green play button.
+    3. If you are using a different IDE, please refer to the documentation for that IDE on how to set active profiles for Spring Boot applications.
+5.  If everything is working correctly, the server should be running on `http://localhost:8080`
 
 ## Environment Variables
 
@@ -29,14 +32,14 @@ Otherwise, you will need to create a `.env` file in the `frontend` directory wit
 7.  Run `npm install --legacy-peer-deps`
 8.  Run `npm run start`
 9.  The frontend will be running on port 4200, and will automatically open in your browser
-10. If the browser does not open automatically, you can navigate to `http://localhost:4200/` in your browser to view the application. You can register as a new user or login with the following credentials:
+10. If the browser does not open automatically, you can navigate to `http://localhost:4200` in your browser to view the application. You can register as a new user or login with the following credentials:
 
     - Email: `customer@swagbag.com`
     - Password: `password`
 
-11. If you would like to test the admin functionality, you can register as a new admin or login with the following credentials:
+11. [Optional] If you set the `.env` file in the `frontend` directory properly, and would like to test the admin functionality, you can register as a new admin or login with the following credentials:
 
     - Email: `admin@swagbag.com`
     - Password: `password`
 
-Happy shopping with SwagBag!
+Happy shopping with SwagBag :)
