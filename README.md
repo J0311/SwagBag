@@ -37,6 +37,7 @@ SwagBag is an e-commerce application offering a wide selection of Revature swag 
 
 ## Getting Started
 
+
 ### Prerequisites
 
 - [Java 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
