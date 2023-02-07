@@ -2,7 +2,7 @@
 
 &lt;Group Project/E-Commerce full stack app>
 
-SwagBag is an e-commerce application offering a wide selection of Revature swag for both Revature and external users. Users can search for products, add and remove products from a cart, view product details, and purchase products. SwagBag provides the ability to view previous orders and perform account maintenance such as updating user passwords. Other user functionality includes the ability to create and read product reviews. It also allows admins to add new products, and update existing products.
+SwagBag is an E-commerce application offering a wide selection of Revature swag for both Revature and external users. Users can search for products, add and remove products from a cart, view product details, and purchase products. SwagBag provides the ability to view previous orders and perform account maintenance such as updating user passwords. Other user functionality includes the ability to create and read product reviews. It also allows admins to add new products, and update existing products.
 
 ## Tech Stack
 
